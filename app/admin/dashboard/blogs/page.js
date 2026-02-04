@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
+import { FiPlus } from 'react-icons/fi';
 
 export default function ManageBlogs() {
   const [blogs, setBlogs] = useState([]);
@@ -74,6 +75,9 @@ export default function ManageBlogs() {
           <Link
             href="/admin/dashboard/create-blog"
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
               padding: '12px 24px',
               background: 'var(--accent)',
               color: '#fff',
@@ -82,7 +86,8 @@ export default function ManageBlogs() {
               fontWeight: 600,
             }}
           >
-            ➕ Create New
+            <FiPlus size={18} />
+            Create New
           </Link>
         </div>
 

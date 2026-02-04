@@ -27,15 +27,24 @@ export default function SectionFields({ section, onChange }) {
     onChange({ ...c, items: n });
   };
   const addItem = () => onChange({ ...c, items: [...(c.items || []), { title: '', desc: '', img: '', imgPublicId: '', icon: '' }] });
+  const addTestimonialItem = () => onChange({ ...c, items: [...(c.items || []), { name: '', role: '', text: '', bottom: '', img: '', imgPublicId: '' }] });
   const removeItem = (idx) => onChange({ ...c, items: (c.items || []).filter((_, i) => i !== idx) });
+  const updateTestimonialItemImage = (idx, { url, publicId }) => {
+    const items = c.items || [];
+    const n = [...items];
+    n[idx] = { ...n[idx], img: url, imgPublicId: publicId };
+    onChange({ ...c, items: n });
+  };
 
   const updateImage = (key, { url, publicId }) => {
     onChange({ ...c, [key]: url, [key + 'PublicId']: publicId });
   };
 
   const updateItemImage = (idx, { url, publicId }) => {
-    updateItem(idx, 'img', url);
-    updateItem(idx, 'imgPublicId', publicId);
+    const items = c.items || [];
+    const n = [...items];
+    n[idx] = { ...n[idx], img: url, imgPublicId: publicId };
+    onChange({ ...c, items: n });
   };
 
   switch (section.type) {
@@ -100,7 +109,21 @@ export default function SectionFields({ section, onChange }) {
           <input placeholder="Title" value={c.title || ''} onChange={(e) => update('title', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
           <input placeholder="Description" value={c.description || ''} onChange={(e) => update('description', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
           <input placeholder="Button Text" value={c.buttonText || ''} onChange={(e) => update('buttonText', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
-          <input placeholder="Button Link" value={c.buttonLink || ''} onChange={(e) => update('buttonLink', e.target.value)} style={{ width: '100%', padding: '8px' }} />
+          <input placeholder="Button Link" value={c.buttonLink || ''} onChange={(e) => update('buttonLink', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '12px' }} />
+          <label style={{ display: 'block', marginBottom: '4px', fontWeight: 600 }}>Background Images (3)</label>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+            {[0, 1, 2].map((i) => (
+              <div key={i}>
+                <label style={{ fontSize: '12px', color: '#666' }}>Image {i + 1}</label>
+                <ImageUpload value={c.images?.[i]} publicId={c.imagesPublicIds?.[i]} onChange={({ url, publicId }) => {
+                  const imgs = [...(c.images || ['', '', ''])];
+                  const ids = [...(c.imagesPublicIds || ['', '', ''])];
+                  imgs[i] = url; ids[i] = publicId;
+                  onChange({ ...c, images: imgs, imagesPublicIds: ids });
+                }} folder="pages" placeholder={`Image ${i + 1}`} />
+              </div>
+            ))}
+          </div>
         </>
       );
     case 'contact':
@@ -115,7 +138,43 @@ export default function SectionFields({ section, onChange }) {
     case 'html':
       return <textarea placeholder="HTML" value={c.content || ''} onChange={(e) => update('content', e.target.value)} rows={6} style={{ width: '100%', padding: '8px' }} />;
     case 'newsletter':
-      return <input placeholder="Title" value={c.title || ''} onChange={(e) => update('title', e.target.value)} style={{ width: '100%', padding: '8px' }} />;
+      return (
+        <>
+          <input placeholder="Title (HTML ok)" value={c.title || ''} onChange={(e) => update('title', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
+          <label style={{ display: 'block', marginBottom: '4px', fontWeight: 600 }}>Background Images (3)</label>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+            {[0, 1, 2].map((i) => (
+              <div key={i}>
+                <label style={{ fontSize: '12px', color: '#666' }}>Image {i + 1}</label>
+                <ImageUpload value={c.images?.[i]} publicId={c.imagesPublicIds?.[i]} onChange={({ url, publicId }) => {
+                  const imgs = [...(c.images || ['', '', ''])];
+                  const ids = [...(c.imagesPublicIds || ['', '', ''])];
+                  imgs[i] = url; ids[i] = publicId;
+                  onChange({ ...c, images: imgs, imagesPublicIds: ids });
+                }} folder="pages" placeholder={`Image ${i + 1}`} />
+              </div>
+            ))}
+          </div>
+        </>
+      );
+    case 'testimonials':
+      return (
+        <>
+          <input placeholder="Section Title" value={c.title || ''} onChange={(e) => update('title', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
+          <button type="button" onClick={addTestimonialItem} style={{ marginBottom: '8px' }}>+ Add Testimonial</button>
+          {(c.items || []).map((item, i) => (
+            <div key={i} style={{ marginBottom: '12px', padding: '12px', background: '#fff', borderRadius: '8px', border: '1px solid #eee' }}>
+              <input placeholder="Name" value={item.name || ''} onChange={(e) => updateItem(i, 'name', e.target.value)} style={{ width: '100%', padding: '6px', marginBottom: '4px' }} />
+              <input placeholder="Role" value={item.role || ''} onChange={(e) => updateItem(i, 'role', e.target.value)} style={{ width: '100%', padding: '6px', marginBottom: '4px' }} />
+              <textarea placeholder="Quote/Testimonial text" value={item.text || ''} onChange={(e) => updateItem(i, 'text', e.target.value)} rows={3} style={{ width: '100%', padding: '6px', marginBottom: '4px' }} />
+              <input placeholder="Bottom text (e.g. Priya S., Founder)" value={item.bottom || ''} onChange={(e) => updateItem(i, 'bottom', e.target.value)} style={{ width: '100%', padding: '6px', marginBottom: '4px' }} />
+              <label style={{ display: 'block', marginBottom: '4px', fontSize: '13px' }}>Photo</label>
+              <ImageUpload value={item.img} publicId={item.imgPublicId} onChange={(v) => updateTestimonialItemImage(i, v)} folder="pages" placeholder="Upload photo" style={{ marginBottom: '8px' }} />
+              <button type="button" onClick={() => removeItem(i)} style={{ color: '#f44336' }}>Remove</button>
+            </div>
+          ))}
+        </>
+      );
     default:
       return null;
   }

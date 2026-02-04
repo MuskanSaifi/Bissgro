@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-const REVIEWS = [
-  { img: '/assets/review/1.png', name: 'Priya Sharma', role: 'Founder, Startup Hub', text: "The Bissgro team helped us launch our platform in record time. Their expertise in React and Node.js gave us a fast, scalable solution. Couldn't have asked for a better partner.", bottom: 'Priya S., Founder' },
-  { img: '/assets/review/3.png', name: 'Ankit Rawat', role: 'Marketing Director', text: "Professional, responsive, and highly skilled. Our new website not only looks amazing but is also optimized for SEO. We've already seen an increase in traffic and leads.", bottom: 'Ankit Rawat., Director' },
-  { img: '/assets/review/2.png', name: 'Ayesha Khan', role: 'E-commerce Owner', text: "Working with Bissgro was a smooth experience. They built a custom Laravel + React solution for my e-commerce store, and sales have grown significantly since launch.", bottom: 'Ayesha K., Business Owner' },
+const DEFAULT_REVIEWS = [
+  { img: '/assets/review/1.png', name: 'Priya Sharma', role: 'Founder, Startup Hub', text: "The Bissgro team helped us launch our platform in record time.", bottom: 'Priya S., Founder' },
+  { img: '/assets/review/3.png', name: 'Ankit Rawat', role: 'Marketing Director', text: "Professional, responsive, and highly skilled.", bottom: 'Ankit Rawat., Director' },
+  { img: '/assets/review/2.png', name: 'Ayesha Khan', role: 'E-commerce Owner', text: "Working with Bissgro was a smooth experience.", bottom: 'Ayesha K., Business Owner' },
 ];
 
-export default function ReviewSlider() {
+export default function ReviewSlider({ items = [], title }) {
+  const REVIEWS = items?.length ? items.map((r) => ({ img: r.img || '/assets/logo.png', name: r.name || '', role: r.role || '', text: r.text || '', bottom: r.bottom || '' })) : DEFAULT_REVIEWS;
   const [idx, setIdx] = useState(0);
   const [resizeTick, setResizeTick] = useState(0);
 
@@ -64,7 +65,7 @@ export default function ReviewSlider() {
 
   return (
     <section className="review" aria-labelledby="reviews-title">
-      <h2 id="reviews-title">What Our Clients Say</h2>
+      <h2 id="reviews-title">{title || 'What Our Clients Say'}</h2>
       <div className="review-slider">
         <div className="review-cards" id="review-track">
           {REVIEWS.map((r, i) => (

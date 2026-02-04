@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import connectDB from '@/lib/db';
 import Page from '@/models/Page';
 import { getTokenFromRequest, verifyToken } from '@/lib/auth';
@@ -103,6 +104,7 @@ export async function POST(request) {
       published: published !== false,
       isHome: isHome || false,
     });
+    if (isHome) revalidatePath('/');
 
     return NextResponse.json({ message: 'Page created', page }, { status: 201 });
   } catch (error) {

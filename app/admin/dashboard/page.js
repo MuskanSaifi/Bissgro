@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
+import { FiFileText, FiHome, FiPlus, FiEye, FiMail } from 'react-icons/fi';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({ total: 0, published: 0, drafts: 0 });
@@ -51,10 +52,13 @@ export default function Dashboard() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <h2 style={{ fontSize: '24px', fontWeight: 600 }}>Quick Actions</h2>
           </div>
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
             <Link
               href="/admin/dashboard/pages"
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
                 padding: '12px 24px',
                 background: '#9c27b0',
                 color: '#fff',
@@ -63,11 +67,15 @@ export default function Dashboard() {
                 fontWeight: 600,
               }}
             >
-              📄 Manage Pages
+              <FiFileText size={18} />
+              Manage Pages
             </Link>
             <Link
               href="/admin/dashboard/home"
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
                 padding: '12px 24px',
                 background: '#795548',
                 color: '#fff',
@@ -76,11 +84,15 @@ export default function Dashboard() {
                 fontWeight: 600,
               }}
             >
-              🏠 Home Sections
+              <FiHome size={18} />
+              Home Sections
             </Link>
             <Link
               href="/admin/dashboard/pages/create"
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
                 padding: '12px 24px',
                 background: '#673ab7',
                 color: '#fff',
@@ -89,11 +101,15 @@ export default function Dashboard() {
                 fontWeight: 600,
               }}
             >
-              ➕ Create Page
+              <FiPlus size={18} />
+              Create Page
             </Link>
             <Link
               href="/admin/dashboard/create-blog"
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
                 padding: '12px 24px',
                 background: 'var(--accent)',
                 color: '#fff',
@@ -102,11 +118,15 @@ export default function Dashboard() {
                 fontWeight: 600,
               }}
             >
-              ➕ Create Blog
+              <FiPlus size={18} />
+              Create Blog
             </Link>
             <Link
               href="/admin/dashboard/blogs"
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
                 padding: '12px 24px',
                 background: '#2196f3',
                 color: '#fff',
@@ -115,12 +135,16 @@ export default function Dashboard() {
                 fontWeight: 600,
               }}
             >
-              📝 Manage Blogs
+              <FiFileText size={18} />
+              Manage Blogs
             </Link>
             <Link
               href="/blog"
               target="_blank"
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
                 padding: '12px 24px',
                 background: '#4caf50',
                 color: '#fff',
@@ -129,7 +153,25 @@ export default function Dashboard() {
                 fontWeight: 600,
               }}
             >
-              👁️ View Blog Page
+              <FiEye size={18} />
+              View Blog Page
+            </Link>
+            <Link
+              href="/admin/dashboard/leads"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '12px 24px',
+                background: '#e91e63',
+                color: '#fff',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                fontWeight: 600,
+              }}
+            >
+              <FiMail size={18} />
+              Subscribe Leads
             </Link>
           </div>
         </div>

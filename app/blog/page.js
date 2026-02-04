@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 async function getBlogs() {
   try {
@@ -24,10 +22,8 @@ export default async function BlogPage() {
   const blogs = await getBlogs();
 
   return (
-    <>
-      <Header />
-      <main style={{ paddingTop: '90px', minHeight: '100vh' }}>
-        <section style={{ padding: '60px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div style={{ paddingTop: '90px', minHeight: '100vh' }}>
+      <section style={{ padding: '60px 20px', maxWidth: '1200px', margin: '0 auto' }}>
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '48px', marginBottom: '20px', textAlign: 'center' }}>Our Blog</h1>
           <p style={{ textAlign: 'center', color: '#666', marginBottom: '50px', fontSize: '18px' }}>Latest articles, insights, and updates</p>
 
@@ -41,6 +37,7 @@ export default async function BlogPage() {
                 <Link
                   key={blog._id}
                   href={`/blog/${blog.slug}`}
+                  className="blog-card-link"
                   style={{
                     background: '#fff',
                     borderRadius: '12px',
@@ -48,16 +45,7 @@ export default async function BlogPage() {
                     boxShadow: 'var(--card-shadow)',
                     textDecoration: 'none',
                     color: 'inherit',
-                    transition: 'transform 0.2s, box-shadow 0.2s',
                     display: 'block',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-5px)';
-                    e.currentTarget.style.boxShadow = '0 12px 40px rgba(15,20,30,0.12)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'var(--card-shadow)';
                   }}
                 >
                   <img
@@ -77,9 +65,7 @@ export default async function BlogPage() {
               ))}
             </div>
           )}
-        </section>
-      </main>
-      <Footer />
-    </>
+      </section>
+    </div>
   );
 }

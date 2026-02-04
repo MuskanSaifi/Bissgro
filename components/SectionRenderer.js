@@ -52,10 +52,10 @@ export default function SectionRenderer({ section }) {
             {services.map((s, i) => (
               <div key={i} className="service-card">
                 <div className="icon" style={{ background: s.icon || '#d97436' }}>
-                  <img src={s.img || '/assets/logo.png'} alt="" className="img-fluid" />
+                  <img src={s.img || '/assets/logo.png'} alt={s.title || ''} className="img-fluid" />
                 </div>
-                <h3>{s.title}</h3>
-                <p>{s.desc}</p>
+                <h3>{s.title || 'Item'}</h3>
+                <p>{s.desc || ''}</p>
               </div>
             ))}
           </div>
@@ -86,10 +86,10 @@ export default function SectionRenderer({ section }) {
             {tech.map((t, i) => (
               <div key={i} className="tech-card">
                 <div className="tech-bubble">
-                  <img src={t.img} alt={t.title} className="img-fluid" />
+                  <img src={t.img || '/assets/logo.png'} alt={t.title || ''} className="img-fluid" />
                 </div>
-                <h4>{t.title}</h4>
-                <p>{t.desc}</p>
+                <h4>{t.title || 'Item'}</h4>
+                <p>{t.desc || ''}</p>
               </div>
             ))}
           </div>
@@ -97,12 +97,19 @@ export default function SectionRenderer({ section }) {
       );
 
     case 'testimonials':
-      return <ReviewSlider />;
+      return <ReviewSlider items={c.items} title={c.title} />;
 
     case 'cta':
       return (
-        <section className="newsletter">
-          <div className="panel">
+        <section className="newsletter" style={c.images?.filter(Boolean).length ? { position: 'relative', overflow: 'hidden' } : {}}>
+          {c.images?.filter(Boolean).length > 0 && (
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', gap: 0, opacity: 0.15, pointerEvents: 'none' }}>
+              {c.images.filter(Boolean).slice(0, 3).map((src, i) => (
+                <div key={i} style={{ flex: 1, backgroundImage: `url(${src})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+              ))}
+            </div>
+          )}
+          <div className="panel" style={{ position: 'relative', zIndex: 1 }}>
             <h3>{c.title || "Let's Work Together"}</h3>
             <p>{c.description || ''}</p>
             <a className="btn-book" href={c.buttonLink || 'https://wa.me/917303981193'} target="_blank" rel="noopener noreferrer">
@@ -137,8 +144,15 @@ export default function SectionRenderer({ section }) {
 
     case 'newsletter':
       return (
-        <section className="newsletter">
-          <div className="panel">
+        <section className="newsletter" style={c.images?.filter(Boolean).length ? { position: 'relative', overflow: 'hidden' } : {}}>
+          {c.images?.filter(Boolean).length > 0 && (
+            <div style={{ position: 'absolute', inset: 0, display: 'flex', gap: 0, opacity: 0.15, pointerEvents: 'none' }}>
+              {c.images.filter(Boolean).slice(0, 3).map((src, i) => (
+                <div key={i} style={{ flex: 1, backgroundImage: `url(${src})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+              ))}
+            </div>
+          )}
+          <div className="panel" style={{ position: 'relative', zIndex: 1 }}>
             <h3 dangerouslySetInnerHTML={{ __html: c.title || 'Get Our Promo Code by<br /> Subscribing To our Newsletter' }} />
             <NewsletterForm />
           </div>

@@ -1,7 +1,5 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 async function getBlog(slug) {
   try {
@@ -58,9 +56,7 @@ export default async function BlogPost({ params }) {
   }
 
   return (
-    <>
-      <Header />
-      <main style={{ paddingTop: '90px', minHeight: '100vh' }}>
+    <div style={{ paddingTop: '90px', minHeight: '100vh' }}>
         <article style={{ maxWidth: '900px', margin: '0 auto', padding: '40px 20px' }}>
           <Link href="/blog" style={{ color: 'var(--accent)', textDecoration: 'none', marginBottom: '20px', display: 'inline-block' }}>
             ← Back to Blog
@@ -97,8 +93,6 @@ export default async function BlogPost({ params }) {
             dangerouslySetInnerHTML={{ __html: blog.content.replace(/\n/g, '<br />') }}
           />
         </article>
-      </main>
-      <Footer />
-    </>
+    </div>
   );
 }

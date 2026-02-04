@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { FiBarChart2, FiFileText, FiHome, FiPlus, FiMail } from 'react-icons/fi';
 
 export default function AdminSidebar() {
   const pathname = usePathname();
@@ -30,11 +31,12 @@ export default function AdminSidebar() {
   };
 
   const menuItems = [
-    { href: '/admin/dashboard', label: 'Dashboard', icon: '📊' },
-    { href: '/admin/dashboard/pages', label: 'Pages', icon: '📄' },
-    { href: '/admin/dashboard/home', label: 'Home Sections', icon: '🏠' },
-    { href: '/admin/dashboard/blogs', label: 'Blogs', icon: '📝' },
-    { href: '/admin/dashboard/create-blog', label: 'Create Blog', icon: '➕' },
+    { href: '/admin/dashboard', label: 'Dashboard', Icon: FiBarChart2 },
+    { href: '/admin/dashboard/home', label: 'Home Sections', Icon: FiHome },
+    { href: '/admin/dashboard/pages', label: 'Pages', Icon: FiFileText },
+    { href: '/admin/dashboard/blogs', label: 'Blogs', Icon: FiFileText },
+    { href: '/admin/dashboard/create-blog', label: 'Create Blog', Icon: FiPlus },
+    { href: '/admin/dashboard/leads', label: 'Subscribe Leads', Icon: FiMail },
   ];
 
   return (
@@ -76,7 +78,7 @@ export default function AdminSidebar() {
               transition: 'all 0.2s',
             }}
           >
-            <span>{item.icon}</span>
+            <item.Icon size={18} style={{ flexShrink: 0 }} />
             <span>{item.label}</span>
           </Link>
         ))}

@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
 import SectionFields, { SECTION_TYPES } from '@/components/SectionFields';
+import SectionRenderer from '@/components/SectionRenderer';
+import { FiEye, FiEdit2, FiRefreshCw } from 'react-icons/fi';
 
 export default function HomeEditor() {
   const router = useRouter();
@@ -13,14 +15,15 @@ export default function HomeEditor() {
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
 
-  useEffect(() => {
-    fetch('/api/pages', { credentials: 'include' })
+  const loadHomePage = () => {
+    setFetching(true);
+    fetch('/api/pages?home=true', { credentials: 'include' })
       .then((res) => res.json())
       .then((data) => {
-        const home = data.pages?.find((p) => p.isHome || p.slug === 'home');
+        const home = data.page;
         if (home) {
           setPage(home);
-          setSections(home.sections || []);
+          setSections(JSON.parse(JSON.stringify(home.sections || [])));
         } else {
           setPage(null);
           setSections([
@@ -36,8 +39,13 @@ export default function HomeEditor() {
       })
       .catch(() => toast.error('Failed to load'))
       .finally(() => setFetching(false));
+  };
+
+  useEffect(() => {
+    loadHomePage();
   }, []);
 
+  const [showPreview, setShowPreview] = useState(true);
   const addSection = (type) => setSections((s) => [...s, { type, content: {}, order: s.length }]);
   const removeSection = (i) => setSections((s) => s.filter((_, idx) => idx !== i));
   const updateSectionContent = (i, content) => {
@@ -47,16 +55,27 @@ export default function HomeEditor() {
   const handleSave = async () => {
     setLoading(true);
     try {
+      const sectionsToSave = sections.map((s, i) => ({
+        type: s.type,
+        content: JSON.parse(JSON.stringify(s.content || {})),
+        order: i,
+      }));
       if (page) {
         const res = await fetch(`/api/pages/${page._id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ sections: sections.map((s, i) => ({ ...s, order: i })) }),
+          body: JSON.stringify({ sections: sectionsToSave }),
           credentials: 'include',
         });
         const data = await res.json();
-        if (res.ok) toast.success('Home page updated!');
-        else toast.error(data.error || 'Update failed');
+        if (res.ok) {
+          toast.success('Home page updated!');
+          const updated = data.page || page;
+          setPage(updated);
+          setSections(JSON.parse(JSON.stringify(updated.sections || sectionsToSave)));
+        } else {
+          toast.error(data.error || 'Update failed');
+        }
       } else {
         const res = await fetch('/api/pages', {
           method: 'POST',
@@ -64,7 +83,7 @@ export default function HomeEditor() {
           body: JSON.stringify({
             slug: 'home',
             title: 'Home',
-            sections: sections.map((s, i) => ({ ...s, order: i })),
+            sections: sectionsToSave,
             published: true,
             isHome: true,
           }),
@@ -73,8 +92,12 @@ export default function HomeEditor() {
         const data = await res.json();
         if (res.ok) {
           toast.success('Home page created!');
-          setPage(data.page);
-        } else toast.error(data.error || 'Create failed');
+          const created = data.page;
+          setPage(created);
+          setSections(JSON.parse(JSON.stringify(created?.sections || sectionsToSave)));
+        } else {
+          toast.error(data.error || 'Create failed');
+        }
       }
     } catch {
       toast.error('Something went wrong');
@@ -91,7 +114,34 @@ export default function HomeEditor() {
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '36px' }}>Home Page Sections</h1>
-          <div style={{ display: 'flex', gap: '12px' }}>
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <button
+              type="button"
+              onClick={() => setShowPreview(!showPreview)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '12px 24px',
+                background: showPreview ? '#333' : '#6c757d',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '8px',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              {showPreview ? <FiEdit2 size={18} /> : <FiEye size={18} />}
+              {showPreview ? 'Edit' : 'Preview'}
+            </button>
+            <button
+              type="button"
+              onClick={() => { loadHomePage(); toast.success('Reloaded from saved'); }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', background: '#6c757d', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}
+            >
+              <FiRefreshCw size={18} />
+              Reload
+            </button>
             <a href="/" target="_blank" rel="noopener noreferrer" style={{ padding: '12px 24px', background: '#28a745', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 600 }}>View Home</a>
             <button onClick={handleSave} disabled={loading} style={{ padding: '12px 24px', background: loading ? '#ccc' : 'var(--accent)', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer' }}>
               {loading ? 'Saving...' : 'Save'}
@@ -99,23 +149,39 @@ export default function HomeEditor() {
           </div>
         </div>
 
-        <div style={{ background: '#fff', padding: '30px', borderRadius: '12px', boxShadow: 'var(--card-shadow)' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '20px' }}>
-            {SECTION_TYPES.map((t) => (
-              <button key={t.value} type="button" onClick={() => addSection(t.value)} style={{ padding: '8px 16px', background: '#f0f0f0', border: '1px solid #ddd', borderRadius: '8px', cursor: 'pointer' }}>
-                + {t.label}
-              </button>
+        <div style={{ display: 'grid', gridTemplateColumns: showPreview ? '1fr 1fr' : '1fr', gap: '24px' }}>
+          <div style={{ background: '#fff', padding: '30px', borderRadius: '12px', boxShadow: 'var(--card-shadow)' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '20px' }}>
+              {SECTION_TYPES.map((t) => (
+                <button key={t.value} type="button" onClick={() => addSection(t.value)} style={{ padding: '8px 16px', background: '#f0f0f0', border: '1px solid #ddd', borderRadius: '8px', cursor: 'pointer' }}>
+                  + {t.label}
+                </button>
+              ))}
+            </div>
+            {sections.map((sec, i) => (
+              <div key={i} style={{ marginBottom: '20px', padding: '20px', background: '#f8f9fa', borderRadius: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
+                  <strong>{SECTION_TYPES.find((t) => t.value === sec.type)?.label || sec.type}</strong>
+                  <button type="button" onClick={() => removeSection(i)} style={{ color: '#f44336', background: 'none', border: 'none', cursor: 'pointer' }}>Remove</button>
+                </div>
+                <SectionFields section={sec} onChange={(c) => updateSectionContent(i, c)} />
+              </div>
             ))}
           </div>
-          {sections.map((sec, i) => (
-            <div key={i} style={{ marginBottom: '20px', padding: '20px', background: '#f8f9fa', borderRadius: '8px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
-                <strong>{SECTION_TYPES.find((t) => t.value === sec.type)?.label || sec.type}</strong>
-                <button type="button" onClick={() => removeSection(i)} style={{ color: '#f44336', background: 'none', border: 'none', cursor: 'pointer' }}>Remove</button>
-              </div>
-              <SectionFields section={sec} onChange={(c) => updateSectionContent(i, c)} />
+          {showPreview && (
+            <div style={{ background: '#fff', padding: '24px', borderRadius: '12px', boxShadow: 'var(--card-shadow)', position: 'sticky', top: '24px', maxHeight: 'calc(100vh - 120px)', overflowY: 'auto' }}>
+              <h3 style={{ marginBottom: '16px', fontSize: '18px' }}>Live Preview</h3>
+              {sections.length === 0 ? (
+                <p style={{ color: '#999', textAlign: 'center', padding: '40px' }}>Add sections to see preview</p>
+              ) : (
+                [...sections].sort((a, b) => (a.order || 0) - (b.order || 0)).map((sec, i) => (
+                  <div key={i} style={{ marginBottom: '24px' }}>
+                    <SectionRenderer section={sec} />
+                  </div>
+                ))
+              )}
             </div>
-          ))}
+          )}
         </div>
       </div>
     </>

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
+import { FiPlus } from 'react-icons/fi';
 
 export default function PagesList() {
   const [pages, setPages] = useState([]);
@@ -48,6 +49,9 @@ export default function PagesList() {
           <Link
             href="/admin/dashboard/pages/create"
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
               padding: '12px 24px',
               background: 'var(--accent)',
               color: '#fff',
@@ -56,7 +60,8 @@ export default function PagesList() {
               fontWeight: 600,
             }}
           >
-            + Create Page
+            <FiPlus size={18} />
+            Create Page
           </Link>
         </div>
 

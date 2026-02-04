@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import connectDB from '@/lib/db';
 import Page from '@/models/Page';
 import { getTokenFromRequest, verifyToken } from '@/lib/auth';
@@ -73,6 +74,7 @@ export async function PUT(request, { params }) {
     } else if (isHome === false) page.isHome = false;
 
     await page.save();
+    if (page.isHome) revalidatePath('/');
     return NextResponse.json({ message: 'Page updated', page }, { status: 200 });
   } catch (error) {
     console.error('Update page error:', error);
