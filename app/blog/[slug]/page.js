@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 async function getBlog(slug) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/blogs`, {
+    const res = await fetch('/api/blogs', {
       cache: 'no-store',
     });
     const data = await res.json();
