@@ -1,8 +1,15 @@
 import Link from 'next/link';
 
+function getBaseUrl() {
+  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  const port = process.env.PORT || 3000;
+  return `http://localhost:${port}`;
+}
+
 async function getBlogs() {
   try {
-    const res = await fetch('/api/blogs', {
+    const res = await fetch(`${getBaseUrl()}/api/blogs`, {
       cache: 'no-store',
     });
     const data = await res.json();

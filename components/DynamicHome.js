@@ -1,8 +1,15 @@
 import SectionRenderer from './SectionRenderer';
 
+function getBaseUrl() {
+  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  const port = process.env.PORT || 3000;
+  return `http://localhost:${port}`;
+}
+
 async function getHomePage() {
   try {
-    const res = await fetch('/api/pages?home=true', { cache: 'no-store' });
+    const res = await fetch(`${getBaseUrl()}/api/pages?home=true`, { cache: 'no-store' });
     const data = await res.json();
     return data.page;
   } catch (error) {
