@@ -32,7 +32,6 @@ export default function AdminSidebar() {
 
   const menuItems = [
     { href: '/admin/dashboard', label: 'Dashboard', Icon: FiBarChart2 },
-    { href: '/admin/dashboard/home', label: 'Home Sections', Icon: FiHome },
     { href: '/admin/dashboard/pages', label: 'Pages', Icon: FiFileText },
     { href: '/admin/dashboard/blogs', label: 'Blogs', Icon: FiFileText },
     { href: '/admin/dashboard/create-blog', label: 'Create Blog', Icon: FiPlus },

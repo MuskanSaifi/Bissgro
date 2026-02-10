@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast, { Toaster } from 'react-hot-toast';
-import { FiFileText, FiHome, FiPlus, FiEye, FiMail } from 'react-icons/fi';
+import { FiFileText, FiPlus, FiEye, FiMail } from 'react-icons/fi';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({ total: 0, published: 0, drafts: 0 });
@@ -70,23 +70,7 @@ export default function Dashboard() {
               <FiFileText size={18} />
               Manage Pages
             </Link>
-            <Link
-              href="/admin/dashboard/home"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '12px 24px',
-                background: '#795548',
-                color: '#fff',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                fontWeight: 600,
-              }}
-            >
-              <FiHome size={18} />
-              Home Sections
-            </Link>
+            
             <Link
               href="/admin/dashboard/pages/create"
               style={{
@@ -171,7 +155,7 @@ export default function Dashboard() {
               }}
             >
               <FiMail size={18} />
-              Subscribe Leads
+              Leads
             </Link>
           </div>
         </div>

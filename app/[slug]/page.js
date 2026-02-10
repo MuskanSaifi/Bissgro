@@ -4,10 +4,18 @@ import Link from 'next/link';
 
 const RESERVED = ['blog', 'admin', 'api', 'contact-us', 'about-us', 'plans', 'privacy-policy', 'refund-policy', 'shipping-policy', 'terms-conditions'];
 
+function getBaseUrl() {
+  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
+  if (typeof window !== 'undefined') {
+    return window.location.origin;
+  }
+  const port = process.env.PORT || 3000;
+  return `http://localhost:${port}`;
+}
+
 async function getPage(slug) {
   try {
-    const base = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const res = await fetch(`${base}/api/pages?slug=${encodeURIComponent(slug)}`, { cache: 'no-store' });
+    const res = await fetch(`${getBaseUrl()}/api/pages?slug=${encodeURIComponent(slug)}`, { cache: 'no-store' });
     const data = await res.json();
     return data.page || null;
   } catch (error) {

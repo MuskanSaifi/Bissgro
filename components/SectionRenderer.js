@@ -5,12 +5,25 @@ import ReviewSlider from './ReviewSlider';
 
 const defaultServices = [
   { icon: '#9f4a2f', img: '/assets/services/Group 20.png', title: 'Web Development', desc: 'Beautiful, responsive websites.' },
-  { icon: '#e87e1f', img: '/assets/services/Group 22.png', title: 'SEO', desc: 'Improve visibility and organic traffic.' },
+  { icon: '#e87e1f', img: '/assets/services/Group 21.png', title: 'App Development', desc: 'Native & cross-platform apps for iOS and Android.' },
+  { icon: '#e87e1f', img: '/assets/services/Group 22.png', title: 'SEO (Search Engine Optimization)', desc: 'Improve your visibility and grow organic traffic.' },
+  { icon: '#e87e1f', img: '/assets/services/Group 23.png', title: 'SMO (Social Media Optimization)', desc: 'Engaging content and social growth strategies.' },
+  { icon: '#e87e1f', img: '/assets/services/Group 24.png', title: 'Logo Design', desc: 'Professional identities that stand out.' },
+  { icon: '#e87e1f', img: '/assets/services/Group 25.png', title: 'Content Writing', desc: 'Compelling copy for websites, blogs and ads.' },
+  { icon: '#e87e1f', img: '/assets/services/Group 26.png', title: 'Meta Ads / Google Ads', desc: 'Performance-focused ad campaigns.' },
+  { icon: '#e87e1f', img: '/assets/services/Group 27.png', title: 'Video Editing', desc: 'High-quality editing for brand videos.' },
 ];
 
 const defaultTech = [
   { img: '/assets/tech-stack/js.png', title: 'Javascript', desc: 'Frontend & Node.js expertise.' },
-  { img: '/assets/tech-stack/next.php', title: 'Next.js', desc: 'Server-side rendering & SEO.' },
+  { img: '/assets/tech-stack/reactNative.png', title: 'React', desc: 'Modern SPA & component design.' },
+  { img: '/assets/tech-stack/node.png', title: 'Node.js', desc: 'APIs, servers & real-time apps.' },
+  { img: '/assets/tech-stack/php.png', title: 'PHP', desc: 'Legacy & CMS integrations.' },
+  { img: '/assets/tech-stack/sql.png', title: 'SQL', desc: 'Database management.' },
+  { img: '/assets/tech-stack/git.png', title: 'Git', desc: 'Version control.' },
+  { img: '/assets/tech-stack/mongo.png', title: 'MongoDB', desc: 'NoSQL database for scalability.' },
+  { img: '/assets/tech-stack/next.png', title: 'Next.js', desc: 'Server-side rendering & SEO.' },
+  { img: '/assets/tech-stack/reactNative.png', title: 'React Native', desc: 'Cross-platform mobile apps.' },
 ];
 
 export default function SectionRenderer({ section }) {
@@ -67,8 +80,17 @@ export default function SectionRenderer({ section }) {
         <section className="about container" aria-labelledby="about-title">
           <div className="left">
             <h2 id="about-title">{c.title || 'About us'}</h2>
-            <div dangerouslySetInnerHTML={{ __html: (c.content || '').replace(/\n/g, '<br />') || '<p>At BissGro, we specialize in delivering innovative business solutions.</p>' }} />
-          </div>
+            <div
+  dangerouslySetInnerHTML={{
+    __html:
+      (c.content || "").replace(/\n/g, "<br />") ||
+      `
+      <p>At BissGro, we specialize in delivering innovative business solutions tailored for startups and growing enterprises. Our mission is to empower businesses with modern strategies, digital solutions, and expert support.</p>
+      <p>With years of experience, we ensure high-quality services, transparency, and results that help you scale faster. From branding to tech, we've got you covered.</p>
+      `,
+  }}
+/>
+</div>
           <div className="right">
             <div className="avatar">
               <img src={c.image || '/assets/about.png'} alt="About" />
