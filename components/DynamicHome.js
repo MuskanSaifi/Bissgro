@@ -2,8 +2,9 @@ import SectionRenderer from './SectionRenderer';
 
 async function getHomePage() {
   try {
-    const base = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const res = await fetch(`${base}/api/pages?home=true`, { cache: 'no-store' });
+    const base = process.env.NEXT_PUBLIC_BASE_URL || '';
+    const url = base ? `${base}/api/pages?home=true` : '/api/pages?home=true';
+    const res = await fetch(url, { cache: 'no-store' });
     const data = await res.json();
     return data.page;
   } catch (error) {
