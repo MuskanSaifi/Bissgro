@@ -36,7 +36,7 @@ export default function AdminSidebar() {
     { href: '/admin/dashboard/pages', label: 'Pages', Icon: FiFileText },
     { href: '/admin/dashboard/blogs', label: 'Blogs', Icon: FiFileText },
     { href: '/admin/dashboard/create-blog', label: 'Create Blog', Icon: FiPlus },
-    { href: '/admin/dashboard/leads', label: 'Subscribe Leads', Icon: FiMail },
+    { href: '/admin/dashboard/leads', label: 'Leads', Icon: FiMail },
   ];
 
   return (

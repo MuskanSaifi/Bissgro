@@ -22,7 +22,7 @@ export default async function BlogPage() {
   const blogs = await getBlogs();
 
   return (
-    <div style={{ paddingTop: '90px', minHeight: '100vh' }}>
+    <div style={{ minHeight: '100vh' }}>
       <section style={{ padding: '60px 20px', maxWidth: '1200px', margin: '0 auto' }}>
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '48px', marginBottom: '20px', textAlign: 'center' }}>Our Blog</h1>
           <p style={{ textAlign: 'center', color: '#666', marginBottom: '50px', fontSize: '18px' }}>Latest articles, insights, and updates</p>
@@ -51,7 +51,7 @@ export default async function BlogPage() {
                   <img
                     src={blog.image}
                     alt={blog.title}
-                    style={{ width: '100%', height: '200px', objectFit: 'cover' }}
+                    style={{ width: '100%', height: '250px', objectFit: 'contain' }}
                   />
                   <div style={{ padding: '24px' }}>
                     <h2 style={{ fontSize: '22px', fontWeight: 600, marginBottom: '10px', color: 'var(--text)' }}>{blog.title}</h2>

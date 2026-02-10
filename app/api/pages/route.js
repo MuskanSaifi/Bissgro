@@ -5,6 +5,7 @@ import Page from '@/models/Page';
 import { getTokenFromRequest, verifyToken } from '@/lib/auth';
 import User from '@/models/User';
 import { extractImagePublicIdsFromSections } from '@/lib/pageImages';
+import '@/lib/upload'; // ensure public/uploads dirs exist so /uploads/... images can be served
 
 export async function GET(request) {
   try {
