@@ -1,6 +1,7 @@
 'use client';
 
 import ImageUpload from './ImageUpload';
+import RichTextEditor from './RichTextEditor';
 
 const SECTION_TYPES = [
   { value: 'hero', label: 'Hero Banner' },
@@ -51,6 +52,14 @@ export default function SectionFields({ section, onChange }) {
     case 'hero':
       return (
         <>
+          <select
+            value={c.layout || 'default'}
+            onChange={(e) => update('layout', e.target.value)}
+            style={{ width: '100%', padding: '8px', marginBottom: '8px' }}
+          >
+            <option value="default">Default (Home-style)</option>
+            <option value="service">Service Page Layout</option>
+          </select>
           <input placeholder="Title (HTML ok)" value={c.title || ''} onChange={(e) => update('title', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
           <input placeholder="Description" value={c.description || ''} onChange={(e) => update('description', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
           <label style={{ display: 'block', marginBottom: '4px', fontWeight: 600 }}>Image</label>
@@ -63,6 +72,14 @@ export default function SectionFields({ section, onChange }) {
     case 'features':
       return (
         <>
+          <select
+            value={c.layout || 'default'}
+            onChange={(e) => update('layout', e.target.value)}
+            style={{ width: '100%', padding: '8px', marginBottom: '8px' }}
+          >
+            <option value="default">Default Layout</option>
+            <option value="service">Service Page Layout</option>
+          </select>
           <input placeholder="Title" value={c.title || ''} onChange={(e) => update('title', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
           <input placeholder="Subtitle" value={c.subtitle || ''} onChange={(e) => update('subtitle', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
           <button type="button" onClick={addItem} style={{ marginBottom: '8px' }}>+ Add Item</button>
@@ -81,6 +98,14 @@ export default function SectionFields({ section, onChange }) {
     case 'about':
       return (
         <>
+          <select
+            value={c.layout || 'default'}
+            onChange={(e) => update('layout', e.target.value)}
+            style={{ width: '100%', padding: '8px', marginBottom: '8px' }}
+          >
+            <option value="default">Default Layout</option>
+            <option value="service">Service Page Layout</option>
+          </select>
           <input placeholder="Title" value={c.title || ''} onChange={(e) => update('title', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
           <textarea placeholder="Content" value={c.content || ''} onChange={(e) => update('content', e.target.value)} rows={4} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
           <label style={{ display: 'block', marginBottom: '4px', fontWeight: 600 }}>Image</label>
@@ -136,7 +161,18 @@ export default function SectionFields({ section, onChange }) {
         </>
       );
     case 'html':
-      return <textarea placeholder="HTML" value={c.content || ''} onChange={(e) => update('content', e.target.value)} rows={6} style={{ width: '100%', padding: '8px' }} />;
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <span style={{ fontWeight: 600, fontSize: '14px' }}>Content (Rich Text)</span>
+          <RichTextEditor
+            value={c.content || ''}
+            onChange={(val) => update('content', val)}
+            placeholder="Write page content here... Use headings, lists, links and images."
+            minHeight={220}
+            folder="pages"
+          />
+        </div>
+      );
     case 'newsletter':
       return (
         <>

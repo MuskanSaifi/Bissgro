@@ -32,9 +32,11 @@ export default function SectionRenderer({ section }) {
   const c = content || {};
 
   switch (type) {
-    case 'hero':
+    case 'hero': {
+      const layout = c.layout || 'default';
+      const heroClassName = layout === 'service' ? 'hero hero-service container' : 'hero container';
       return (
-        <section className="hero container" aria-label="Hero">
+        <section className={heroClassName} aria-label="Hero">
           <div className="hero-left">
             <h1 className="hero-title" dangerouslySetInnerHTML={{ __html: c.title || "We build your<br /><span>brand's digital presence</span>" }} />
             <p className="hero-desc">{c.description || 'From custom website development to SEO and digital marketing.'}</p>
@@ -52,11 +54,14 @@ export default function SectionRenderer({ section }) {
           </div>
         </section>
       );
+    }
 
-    case 'services':
+    case 'services': {
       const services = c.items?.length ? c.items : defaultServices;
+      const layout = c.layout || 'default';
+      const sectionClass = layout === 'service' ? 'services services-service' : 'services';
       return (
-        <section className="services" aria-labelledby="services-title">
+        <section className={sectionClass} aria-labelledby="services-title">
           <div className="inner">
             <h2 id="services-title">{c.title || 'Our Services'}</h2>
             <p>{c.subtitle || 'We provide a variety of services to grow your business.'}</p>
@@ -74,10 +79,13 @@ export default function SectionRenderer({ section }) {
           </div>
         </section>
       );
+    }
 
-    case 'about':
+    case 'about': {
+      const layout = c.layout || 'default';
+      const sectionClass = layout === 'service' ? 'about about-service container' : 'about container';
       return (
-        <section className="about container" aria-labelledby="about-title">
+        <section className={sectionClass} aria-labelledby="about-title">
           <div className="left">
             <h2 id="about-title">{c.title || 'About us'}</h2>
             <div
@@ -98,6 +106,7 @@ export default function SectionRenderer({ section }) {
           </div>
         </section>
       );
+    }
 
     case 'tech':
       const tech = c.items?.length ? c.items : defaultTech;
@@ -186,10 +195,12 @@ export default function SectionRenderer({ section }) {
         <section className="container py-5" dangerouslySetInnerHTML={{ __html: c.content || '' }} />
       );
 
-    case 'features':
+    case 'features': {
       const features = c.items || [];
+      const layout = c.layout || 'default';
+      const sectionClass = layout === 'service' ? 'services services-service' : 'services';
       return (
-        <section className="services" aria-labelledby="features-title">
+        <section className={sectionClass} aria-labelledby="features-title">
           <div className="inner">
             <h2 id="features-title">{c.title || 'Features'}</h2>
             <p>{c.subtitle || ''}</p>
@@ -204,6 +215,7 @@ export default function SectionRenderer({ section }) {
           </div>
         </section>
       );
+    }
 
     default:
       return null;

@@ -166,6 +166,34 @@
     }
     .hero-actions .btn-book{padding:10px 18px}
 
+    /* Alternate hero layout for service pages */
+    .hero.hero-service{
+      background: var(--muted);
+      border-radius: 32px;
+      padding: 40px 32px;
+      margin-top: 24px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .hero.hero-service .hero-left{
+      padding-right: 0;
+    }
+
+    .hero.hero-service .hero-desc{
+      max-width: 100%;
+    }
+
+    .hero.hero-service .hero-right{
+      max-width: 420px;
+    }
+
+    .hero.hero-service .hero-card{
+      background:#ffffff;
+      border-radius:24px;
+      padding:10px;
+      box-shadow: var(--card-shadow);
+    }
+
     .social-row{display:flex;gap:10px}
     .social-row .circle{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(0,0,0,0.07)}
 
@@ -213,6 +241,35 @@
     }
     .service-card h3{margin:6px 0 6px;font-size:16px}
     .service-card p{color:#7b8086;font-size:14px}
+
+    /* Alternate layout for services/features on service pages */
+    section.services.services-service{
+      background: transparent;
+      padding: 40px 0 20px;
+    }
+
+    .services.services-service .inner{
+      text-align: left;
+      max-width: 900px;
+    }
+
+    .services.services-service .cards-grid{
+      padding: 0;
+      gap: 18px;
+    }
+
+    .services.services-service .service-card{
+      border-radius: 16px;
+      box-shadow: none;
+      border: 1px solid #e5e5e5;
+      background: #fff;
+    }
+
+    .services.services-service .service-card:hover{
+      box-shadow: var(--soft-shadow);
+      transform: translateY(-2px);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
 
     /* ---------- ABOUT ---------- */
 .about {
@@ -262,6 +319,22 @@
   height: auto;
   object-fit: cover;
   display: block;
+}
+
+/* Alternate about layout for service pages */
+.about.about-service{
+  background: var(--muted);
+  border-radius: 28px;
+  padding: 40px 32px;
+  margin-top: 24px;
+}
+
+.about.about-service .left p{
+  max-width: 100%;
+}
+
+.about.about-service .avatar{
+  max-width: 360px;
 }
 
 /* Update your existing <style> block with these modifications */
@@ -916,10 +989,15 @@
     height: calc(100vh - 120px);
     bottom: 80px;
   }
-  
+
   .chatbot-container {
-    bottom: 90px;
+    bottom: 32px;
     right: 20px;
+  }
+
+  /* Bring WhatsApp button closer to bottom on mobile */
+  .whatsapp-float {
+    bottom: 32px;
   }
 }
     /* ---------- Responsive ---------- */

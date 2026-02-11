@@ -17,7 +17,7 @@ const ReactQuill = dynamic(
   { ssr: false }
 );
 
-export default function RichTextEditor({ value, onChange, onImageUploaded, placeholder, minHeight = 280 }) {
+export default function RichTextEditor({ value, onChange, onImageUploaded, placeholder, minHeight = 280, folder = 'blog-content' }) {
   const quillRef = useRef(null);
   const fileInputRef = useRef(null);
   const savedRangeRef = useRef(null);
@@ -38,7 +38,7 @@ export default function RichTextEditor({ value, onChange, onImageUploaded, place
 
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('folder', 'blog-content');
+      formData.append('folder', folder || 'blog-content');
 
       try {
         const res = await fetch('/api/upload', { method: 'POST', body: formData, credentials: 'include' });
@@ -56,13 +56,15 @@ export default function RichTextEditor({ value, onChange, onImageUploaded, place
             onChange(html);
           }
           onImageUploaded?.(data.publicId);
+        } else {
+          console.error('Image upload failed', data?.error || 'Unknown error');
         }
       } catch (err) {
         console.error('Image upload failed', err);
       }
       e.target.value = '';
     },
-    [onChange, onImageUploaded]
+    [folder, onChange, onImageUploaded]
   );
 
   const modules = useCallback(
