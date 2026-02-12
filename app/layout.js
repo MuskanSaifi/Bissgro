@@ -25,6 +25,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-L9Y4E8EWEJ"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="ga-gtag"
+          strategy="afterInteractive"
+        >{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-L9Y4E8EWEJ', {
+            page_path: window.location.pathname,
+          });
+        `}</Script>
+
         <Header />
         <main>{children}</main>
         <Footer />
