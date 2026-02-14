@@ -27,7 +27,7 @@ export default function SectionFields({ section, onChange }) {
     n[idx] = { ...n[idx], [key]: val };
     onChange({ ...c, items: n });
   };
-  const addItem = () => onChange({ ...c, items: [...(c.items || []), { title: '', desc: '', img: '', imgPublicId: '', icon: '' }] });
+  const addItem = () => onChange({ ...c, items: [...(c.items || []), { title: '', desc: '', img: '', imgPublicId: '', icon: '', linkText: '', linkUrl: '' }] });
   const addTestimonialItem = () => onChange({ ...c, items: [...(c.items || []), { name: '', role: '', text: '', bottom: '', img: '', imgPublicId: '' }] });
   const removeItem = (idx) => onChange({ ...c, items: (c.items || []).filter((_, i) => i !== idx) });
   const updateTestimonialItemImage = (idx, { url, publicId }) => {
@@ -60,12 +60,17 @@ export default function SectionFields({ section, onChange }) {
             <option value="default">Default (Home-style)</option>
             <option value="service">Service Page Layout</option>
           </select>
-          <input placeholder="Title (HTML ok)" value={c.title || ''} onChange={(e) => update('title', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
-          <input placeholder="Description" value={c.description || ''} onChange={(e) => update('description', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
-          <label style={{ display: 'block', marginBottom: '4px', fontWeight: 600 }}>Image</label>
+          <input placeholder="Main title (e.g. Top Web Development Company in Noida —)" value={c.title || ''} onChange={(e) => update('title', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
+          <input placeholder="Highlight line (orange, e.g. Build Fast, Secure & Scalable Websites)" value={c.highlight || ''} onChange={(e) => update('highlight', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
+          <textarea placeholder="Description" value={c.description || ''} onChange={(e) => update('description', e.target.value)} rows={3} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
+          <input placeholder="Primary CTA Text (e.g. Get Free Consultation)" value={c.ctaText || ''} onChange={(e) => update('ctaText', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
+          <input placeholder="Primary CTA Link" value={c.ctaLink || ''} onChange={(e) => update('ctaLink', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
+          <input placeholder="Secondary CTA Text (e.g. Request a Quote)" value={c.secondaryCtaText || ''} onChange={(e) => update('secondaryCtaText', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
+          <input placeholder="Secondary CTA Link" value={c.secondaryCtaLink || ''} onChange={(e) => update('secondaryCtaLink', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
+          <input placeholder="Trusted by text (e.g. Trusted by 200+ Companies)" value={c.trustedByText || ''} onChange={(e) => update('trustedByText', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
+          <textarea placeholder="Trusted by logo URLs (one per line)" value={Array.isArray(c.trustedByLogos) ? c.trustedByLogos.join('\n') : (c.trustedByLogos || '')} onChange={(e) => update('trustedByLogos', e.target.value.trim().split(/\n/).filter(Boolean))} rows={3} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
+          <label style={{ display: 'block', marginBottom: '4px', fontWeight: 600 }}>Hero Image</label>
           <ImageUpload value={c.image} publicId={c.imagePublicId} onChange={updateImage.bind(null, 'image')} folder="pages" placeholder="Upload hero image" />
-          <input placeholder="CTA Text" value={c.ctaText || ''} onChange={(e) => update('ctaText', e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '8px' }} />
-          <input placeholder="CTA Link" value={c.ctaLink || ''} onChange={(e) => update('ctaLink', e.target.value)} style={{ width: '100%', padding: '8px' }} />
         </>
       );
     case 'services':
@@ -89,7 +94,9 @@ export default function SectionFields({ section, onChange }) {
               <input placeholder="Description" value={item.desc || ''} onChange={(e) => updateItem(i, 'desc', e.target.value)} style={{ width: '100%', padding: '6px', marginBottom: '4px' }} />
               <label style={{ display: 'block', marginBottom: '4px', fontSize: '13px' }}>Image</label>
               <ImageUpload value={item.img} publicId={item.imgPublicId} onChange={(v) => updateItemImage(i, v)} folder="pages" placeholder="Upload image" style={{ marginBottom: '8px' }} />
-              <input placeholder="Icon color (e.g. #9f4a2f)" value={item.icon || ''} onChange={(e) => updateItem(i, 'icon', e.target.value)} style={{ width: '100%', padding: '6px' }} />
+              <input placeholder="Icon color / Button color (e.g. #9f4a2f)" value={item.icon || ''} onChange={(e) => updateItem(i, 'icon', e.target.value)} style={{ width: '100%', padding: '6px', marginBottom: '4px' }} />
+              <input placeholder="Button text (e.g. Web Development)" value={item.linkText || ''} onChange={(e) => updateItem(i, 'linkText', e.target.value)} style={{ width: '100%', padding: '6px', marginBottom: '4px' }} />
+              <input placeholder="Button link URL" value={item.linkUrl || ''} onChange={(e) => updateItem(i, 'linkUrl', e.target.value)} style={{ width: '100%', padding: '6px' }} />
               <button type="button" onClick={() => removeItem(i)} style={{ marginTop: '8px', color: '#f44336' }}>Remove Item</button>
             </div>
           ))}

@@ -4,14 +4,11 @@ import NewsletterForm from './NewsletterForm';
 import ReviewSlider from './ReviewSlider';
 
 const defaultServices = [
-  { icon: '#9f4a2f', img: '/assets/services/Group 20.png', title: 'Web Development', desc: 'Beautiful, responsive websites.' },
-  { icon: '#e87e1f', img: '/assets/services/Group 21.png', title: 'App Development', desc: 'Native & cross-platform apps for iOS and Android.' },
-  { icon: '#e87e1f', img: '/assets/services/Group 22.png', title: 'SEO (Search Engine Optimization)', desc: 'Improve your visibility and grow organic traffic.' },
-  { icon: '#e87e1f', img: '/assets/services/Group 23.png', title: 'SMO (Social Media Optimization)', desc: 'Engaging content and social growth strategies.' },
-  { icon: '#e87e1f', img: '/assets/services/Group 24.png', title: 'Logo Design', desc: 'Professional identities that stand out.' },
-  { icon: '#e87e1f', img: '/assets/services/Group 25.png', title: 'Content Writing', desc: 'Compelling copy for websites, blogs and ads.' },
-  { icon: '#e87e1f', img: '/assets/services/Group 26.png', title: 'Meta Ads / Google Ads', desc: 'Performance-focused ad campaigns.' },
-  { icon: '#e87e1f', img: '/assets/services/Group 27.png', title: 'Video Editing', desc: 'High-quality editing for brand videos.' },
+  { icon: '#2563eb', img: '/assets/services/WEB.jpg', title: 'Web Development', desc: 'Beautiful, responsive websites.', linkText: 'Web Development', linkUrl: '/web-development-company-in-noida' },
+  { icon: '#ea580c', img: '/assets/services/APP.jpg', title: 'App Development', desc: 'Native & cross-platform apps for iOS and Android.', linkText: 'App Development', linkUrl: '#' },
+  { icon: '#16a34a', img: '/assets/services/SEO.jpg', title: 'Search Engine Optimization', desc: 'Improve your visibility and grow organic traffic.', linkText: 'SEO', linkUrl: '/best-seo-services-in-noida' },
+  { icon: '#7c3aed', img: '/assets/services/SMO.jpg', title: 'Social Media Optimization', desc: 'Engaging content and social growth strategies.', linkText: 'SMO', linkUrl: '#' },
+
 ];
 
 const defaultTech = [
@@ -26,6 +23,7 @@ const defaultTech = [
   { img: '/assets/tech-stack/reactNative.png', title: 'React Native', desc: 'Cross-platform mobile apps.' },
 ];
 
+
 export default function SectionRenderer({ section }) {
   if (!section) return null;
   const { type, content } = section;
@@ -34,21 +32,46 @@ export default function SectionRenderer({ section }) {
   switch (type) {
     case 'hero': {
       const layout = c.layout || 'default';
-      const heroClassName = layout === 'service' ? 'hero hero-service container' : 'hero container';
+      const isServiceHero = layout === 'service';
+      const heroClassName = isServiceHero ? 'hero hero-service container' : 'hero container';
+      const trustedByLogos = Array.isArray(c.trustedByLogos) ? c.trustedByLogos : (c.trustedByLogos ? String(c.trustedByLogos).split(/\n/).filter(Boolean) : []);
+      const hasTrustedBy = isServiceHero && (c.trustedByText || trustedByLogos.length > 0);
+
       return (
         <section className={heroClassName} aria-label="Hero">
           <div className="hero-left">
-            <h1 className="hero-title" dangerouslySetInnerHTML={{ __html: c.title || "We build your<br /><span>brand's digital presence</span>" }} />
+            <h1 className="hero-title">
+              {isServiceHero ? (
+                <>
+                  {c.title || 'Top Web Development Company in Noida —'}
+                  {c.highlight && <span className="hero-highlight">{c.highlight}</span>}
+                </>
+              ) : (
+                <span dangerouslySetInnerHTML={{ __html: c.title || "We build your<br /><span>brand's digital presence</span>" }} />
+              )}
+            </h1>
             <p className="hero-desc">{c.description || 'From custom website development to SEO and digital marketing.'}</p>
             <div className="hero-actions">
-              <a className="btn-dark" href={c.ctaLink || '#'}>{c.ctaText || 'Explore Services'}</a>
+              <a className="btn-dark" href={c.ctaLink || '#'}>{c.ctaText || 'Get Free Consultation'}</a>
               <a className="btn-book" href={c.secondaryCtaLink || 'https://wa.me/917303981193'} target="_blank" rel="noopener noreferrer">
                 {c.secondaryCtaText || 'Request a Quote'}
               </a>
             </div>
+            {hasTrustedBy && (
+              <div className="hero-trusted">
+                {c.trustedByText && <p className="hero-trusted-text">{c.trustedByText}</p>}
+                {trustedByLogos.length > 0 && (
+                  <div className="hero-trusted-logos">
+                    {trustedByLogos.map((url, i) => (
+                      <img key={i} src={url.trim()} alt="" className="hero-trusted-logo" />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           <div className="hero-right">
-            <div className="hero-card">
+            <div className="hero-card hero-visual">
               <img src={c.image || '/assets/banner/banner.jpeg'} alt="Hero" className="img-fluid" />
             </div>
           </div>
@@ -60,20 +83,53 @@ export default function SectionRenderer({ section }) {
       const services = c.items?.length ? c.items : defaultServices;
       const layout = c.layout || 'default';
       const sectionClass = layout === 'service' ? 'services services-service' : 'services';
+      const isWhatWeDoStyle = layout === 'default';
+      const isServicePageStyle = layout === 'service';
       return (
         <section className={sectionClass} aria-labelledby="services-title">
           <div className="inner">
             <h2 id="services-title">{c.title || 'Our Services'}</h2>
             <p>{c.subtitle || 'We provide a variety of services to grow your business.'}</p>
           </div>
-          <div className="container cards-grid">
+          <div className={`container cards-grid ${isWhatWeDoStyle ? 'cards-grid-what-we-do' : ''} ${isServicePageStyle ? 'cards-grid-service-image-top' : ''}`}>
             {services.map((s, i) => (
-              <div key={i} className="service-card">
-                <div className="icon" style={{ background: s.icon || '#d97436' }}>
-                  <img src={s.img || '/assets/logo.png'} alt={s.title || ''} className="img-fluid" />
-                </div>
-                <h3>{s.title || 'Item'}</h3>
-                <p>{s.desc || ''}</p>
+              <div key={i} className={`service-card ${isWhatWeDoStyle ? 'service-card-what-we-do' : ''} ${isServicePageStyle ? 'service-card-image-top' : ''}`}>
+                {isWhatWeDoStyle ? (
+                  <>
+                    <div className="service-card-image">
+                      <img src={s.img || '/assets/logo.png'} alt={s.title || ''} />
+                    </div>
+                    <div className="service-card-body">
+                      <h3>{s.title || 'Item'}</h3>
+                      <p>{s.desc || ''}</p>
+                      <a
+                        className="service-card-btn"
+                        href={s.linkUrl || '#'}
+                        style={{ background: s.icon || 'var(--accent)' }}
+                      >
+                        {s.linkText || s.title || 'Learn more'}
+                      </a>
+                    </div>
+                  </>
+                ) : isServicePageStyle ? (
+                  <>
+                    <div className="service-card-image">
+                      <img src={s.img || '/assets/logo.png'} alt={s.title || ''} />
+                    </div>
+                    <div className="service-card-body">
+                      <h3>{s.title || 'Item'}</h3>
+                      <p>{s.desc || ''}</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="icon" style={{ background: s.icon || '#d97436' }}>
+                      <img src={s.img || '/assets/logo.png'} alt={s.title || ''} className="img-fluid" />
+                    </div>
+                    <h3>{s.title || 'Item'}</h3>
+                    <p>{s.desc || ''}</p>
+                  </>
+                )}
               </div>
             ))}
           </div>
@@ -81,32 +137,37 @@ export default function SectionRenderer({ section }) {
       );
     }
 
-    case 'about': {
-      const layout = c.layout || 'default';
-      const sectionClass = layout === 'service' ? 'about about-service container' : 'about container';
-      return (
-        <section className={sectionClass} aria-labelledby="about-title">
-          <div className="left">
-            <h2 id="about-title">{c.title || 'About us'}</h2>
-            <div
-  dangerouslySetInnerHTML={{
-    __html:
-      (c.content || "").replace(/\n/g, "<br />") ||
-      `
-      <p>At BissGro, we specialize in delivering innovative business solutions tailored for startups and growing enterprises. Our mission is to empower businesses with modern strategies, digital solutions, and expert support.</p>
-      <p>With years of experience, we ensure high-quality services, transparency, and results that help you scale faster. From branding to tech, we've got you covered.</p>
-      `,
-  }}
-/>
-</div>
-          <div className="right">
-            <div className="avatar">
-              <img src={c.image || '/assets/about.png'} alt="About" />
-            </div>
-          </div>
-        </section>
-      );
-    }
+ case 'about': {
+  const layout = c.layout || 'default';
+  const sectionClass = layout === 'service' ? 'about about-service container' : 'about container';
+  return (
+    <section className={sectionClass} aria-labelledby="about-title">
+      <div className="about-left">
+        <h2 id="about-title">{c.title || 'About us'}</h2>
+        <div
+          dangerouslySetInnerHTML={{
+            __html:
+              (c.content || "").replace(/\n/g, "<br />") ||
+              `
+              <p>At BissGro, we specialize in delivering innovative business solutions tailored for startups and growing enterprises. Our mission is to empower businesses with modern strategies, digital solutions, and expert support.</p>
+              <p>With years of experience, we ensure high-quality services, transparency, and results that help you scale faster. From branding to tech, we've got you covered.</p>
+              `,
+          }}
+        />
+      </div>
+
+      <div className="about-right">
+        <div className="about-image-card">
+          <img
+            src={c.image || "/assets/about.png"}
+            alt="About BissGro"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
     case 'tech':
       const tech = c.items?.length ? c.items : defaultTech;

@@ -51,9 +51,10 @@ export default async function DynamicPage({ params }) {
   if (!page) notFound();
 
   const sorted = [...(page.sections || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
+  const isServicePage = typeof slug === 'string' && (slug.includes('-in-noida') || slug.includes('company') || slug.includes('services'));
 
   return (
-    <div style={{ paddingTop: '90px', minHeight: '100vh' }}>
+    <div className={isServicePage ? 'page-type-service' : ''} style={{ paddingTop: '90px', minHeight: '100vh' }}>
       {sorted.length === 0 ? (
         <section className="container py-5">
           <h1>{page.title}</h1>
