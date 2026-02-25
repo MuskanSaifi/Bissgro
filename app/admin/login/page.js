@@ -91,9 +91,6 @@ export default function AdminLogin() {
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', marginTop: '20px', color: '#666' }}>
-          Don&apos;t have an account? <Link href="/admin/register" style={{ color: 'var(--accent)', textDecoration: 'none' }}>Register</Link>
-        </p>
       </div>
     </div>
   );
