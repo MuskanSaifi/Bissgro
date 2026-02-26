@@ -1,24 +1,18 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import User from "./models/User.js"; // path apne project ke hisaab se set karo
 
-// ⚠️ Path apne project ke hisaab se set karo
-// Agar model: models/User.js me hai:
-const User = require("./models/User");
-
-// Agar aapka model src/models/User.js me hai, to upar wali line hata ke ye use karo:
-// const User = require("./src/models/User");
-
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/bissgro";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/yourdbname";
 
 async function seedAdmin() {
   try {
     await mongoose.connect(MONGODB_URI);
-    console.log("✅ MongoDB connected");
+    console.log("MongoDB connected");
 
     const existingAdmin = await User.findOne({ role: "admin" });
 
     if (existingAdmin) {
-      console.log("⚠️ Admin already exists:", existingAdmin.email);
+      console.log("Admin already exists:", existingAdmin.email);
       process.exit(0);
     }
 
@@ -31,13 +25,12 @@ async function seedAdmin() {
       role: "admin",
     });
 
-    console.log("🎉 Admin created successfully!");
-    console.log("📧 Email:", adminUser.email);
-    console.log("🔐 Password: Admin@123");
+    console.log("✅ Admin created successfully:");
+    console.log(adminUser);
 
     process.exit(0);
-  } catch (err) {
-    console.error("❌ Error creating admin:", err);
+  } catch (error) {
+    console.error("❌ Error seeding admin:", error);
     process.exit(1);
   }
 }
