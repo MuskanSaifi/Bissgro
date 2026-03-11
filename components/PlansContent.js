@@ -103,12 +103,12 @@ export default function PlansContent() {
                         ? p.priceText
                         : `₹${Number(p.price).toLocaleString('en-IN')}`}
                     </div>
+                      <button type="button" className="btn-plan" onClick={() => openCheckout(p.name, Number(p.price), 'web')}>Buy Now</button>
                     <ul className="features">
                       {(p.features || []).map((f, j) => (
                         <li key={j}>{f}</li>
                       ))}
                     </ul>
-                    <button type="button" className="btn-plan" onClick={() => openCheckout(p.name, Number(p.price), 'web')}>Buy Now</button>
                   </div>
                 ))}
               </div>
@@ -127,12 +127,12 @@ export default function PlansContent() {
                         ? p.priceText
                         : `₹${Number(p.price).toLocaleString('en-IN')}`}
                     </div>
+                      <button type="button" className="btn-plan" onClick={() => openCheckout(p.name, Number(p.price), 'app')}>Buy Now</button>
                     <ul className="features">
                       {(p.features || []).map((f, j) => (
                         <li key={j}>{f}</li>
                       ))}
                     </ul>
-                    <button type="button" className="btn-plan" onClick={() => openCheckout(p.name, Number(p.price), 'app')}>Buy Now</button>
                   </div>
                 ))}
               </div>
@@ -154,12 +154,12 @@ export default function PlansContent() {
                             {(p.monthly ?? true) && <span className="period">/month</span>}
                           </>}
                     </div>
+                      <button type="button" className="btn-plan" onClick={() => openCheckout(p.name, Number(p.price), 'seo', p.monthly ?? true)}>Buy Now</button>
                     <ul className="features">
                       {(p.features || []).map((f, j) => (
                         <li key={j}>{f}</li>
                       ))}
                     </ul>
-                    <button type="button" className="btn-plan" onClick={() => openCheckout(p.name, Number(p.price), 'seo', p.monthly ?? true)}>Buy Now</button>
                   </div>
                 ))}
               </div>

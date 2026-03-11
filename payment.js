@@ -5,7 +5,7 @@
 // Use Test Mode keys for testing, Live keys for production
 // ═══════════════════════════════════════════════════════════════
 const RAZORPAY_CONFIG = {
-  key: 'rzp_test_S7f24Va8pdX661',  // Razorpay Key ID (Test Mode)
+  key: 'rzp_live_SLRcXLVVFoX1uy',  // Razorpay Key ID (Test Mode)
   // callback_url: 'https://yourdomain.com/payment-callback',  // Optional: redirect after payment
 };
 

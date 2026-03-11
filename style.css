@@ -1634,15 +1634,15 @@
   display: grid;
   /* Desktop: always 4 cards in a row when space allows */
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 30px;
-  max-width: 1200px;
+  gap: 10px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 
 .pricing-section .card {
   background: #fff;
   border-radius: 16px;
-  padding: 32px 26px;
+  padding: 25px 20px;
   box-shadow: var(--soft-shadow);
   border: 1px solid rgba(0, 0, 0, 0.03);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
@@ -1650,7 +1650,7 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .pricing-section .card::before {
@@ -1816,19 +1816,25 @@
   transform: scale(1.05);
 }
 
-.pricing-section .card.featured .badge {
-  position: absolute;
-  top: -12px;
-  right: 20px;
-  background: var(--accent);
-  color: #fff;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  box-shadow: 0 4px 8px rgba(217, 121, 62, 0.3);
+.pricing-section .card.featured {
+  position: relative;
+  border: 2px solid var(--accent);
 }
 
+.pricing-section .card.featured .badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ff8a00, #e52e71);
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
 .pricing-section .price .period {
   font-size: 18px;
   color: #666;
