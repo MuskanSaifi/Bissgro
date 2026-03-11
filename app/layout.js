@@ -20,7 +20,7 @@ export const metadata = {
     'responsive web development',
   ],
 
-  metadataBase: new URL('https://www.bissgro.com'),
+  metadataBase: new URL('https://bissgro.com'),
 
   alternates: {
     canonical: '/',
@@ -30,7 +30,7 @@ export const metadata = {
     title: 'Bissgro - Web Development Company',
     description:
       'Bissgro offers professional website development, SEO, and digital marketing services for businesses.',
-    url: 'https://www.bissgro.com',
+    url: 'https://bissgro.com',
     siteName: 'Bissgro',
     type: 'website',
   },
@@ -79,8 +79,8 @@ export default function RootLayout({ children }) {
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Bissgro",
-            "url": "https://www.bissgro.com",
-            "logo": "https://www.bissgro.com/assets/logo.png",
+            "url": "https://bissgro.com",
+            "logo": "https://bissgro.com/assets/logo.png",
             "sameAs": [
               "https://www.facebook.com/",
               "https://www.instagram.com/",

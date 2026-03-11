@@ -1,9 +1,17 @@
 export const metadata = {
   title: 'About Us | Bissgro - Professional Web Development Company',
-  description: 'Learn more about Bissgro, a professional web development company delivering responsive, SEO-friendly, and modern websites for business growth.',
-  openGraph: { title: 'About Bissgro', url: 'https://www.bissgro.com/about' },
-};
+  description:
+    'Learn more about Bissgro, a professional web development company delivering responsive, SEO-friendly, and modern websites for business growth.',
+  
+  alternates: {
+    canonical: 'https://bissgro.com/about-us',
+  },
 
+  openGraph: {
+    title: 'About Bissgro',
+    url: 'https://bissgro.com/about-us',
+  },
+};
 export default function AboutUs() {
   return (
     <main>

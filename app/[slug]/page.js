@@ -5,7 +5,7 @@ import Link from 'next/link';
 const RESERVED = ['blog', 'admin', 'api', 'contact-us', 'about-us', 'plans', 'privacy-policy', 'refund-policy', 'shipping-policy', 'terms-conditions'];
 
 function getBaseUrl() {
-  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
+  if (process.env.NEXT_PUBLIC_BASE_URL)  return process.env.NEXT_PUBLIC_BASE_URL || 'https://bissgro.com';
   if (typeof window !== 'undefined') {
     return window.location.origin;
   }
@@ -22,19 +22,58 @@ async function getPage(slug) {
     return null;
   }
 }
-
 export async function generateMetadata({ params }) {
   const { slug } = params;
+
   if (RESERVED.includes(slug)) return {};
+
   const page = await getPage(slug);
-  if (!page) return { title: 'Page Not Found | Bissgro' };
+
+  if (!page) {
+    return { title: 'Page Not Found | Bissgro' };
+  }
+
+  const baseUrl = getBaseUrl();
+  const canonicalUrl = `${baseUrl}/${slug}`;
+
   return {
     title: page.metaTitle || `${page.title} | Bissgro`,
     description: page.metaDescription || page.title,
-    keywords: page.metaKeywords,
+    keywords: page.metaKeywords || undefined,
+
+    alternates: {
+      canonical: canonicalUrl,
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+    },
+
+    authors: [{ name: 'Bissgro' }],
+
     openGraph: {
       title: page.metaTitle || page.title,
-      description: page.metaDescription,
+      description: page.metaDescription || page.title,
+      url: canonicalUrl,
+      siteName: 'Bissgro',
+      type: 'website',
+      images: page.metaImage
+        ? [
+            {
+              url: page.metaImage,
+              width: 1200,
+              height: 630,
+              alt: page.title,
+            },
+          ]
+        : [],
+    },
+
+    twitter: {
+      card: 'summary_large_image',
+      title: page.metaTitle || page.title,
+      description: page.metaDescription || page.title,
       images: page.metaImage ? [page.metaImage] : [],
     },
   };

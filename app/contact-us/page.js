@@ -2,8 +2,17 @@ import ContactForm from '@/components/ContactForm';
 
 export const metadata = {
   title: 'Contact Us | Bissgro - Get in Touch',
-  description: 'Have questions or need assistance? Contact Bissgro today. Our team is ready to help you with web development, digital solutions, and more.',
-  openGraph: { title: 'Contact Us | Bissgro', url: 'https://www.bissgro.com/contact' },
+  description:
+    'Have questions or need assistance? Contact Bissgro today. Our team is ready to help you with web development, digital solutions, and more.',
+
+  alternates: {
+    canonical: 'https://bissgro.com/contact-us',
+  },
+
+  openGraph: {
+    title: 'Contact Us | Bissgro',
+    url: 'https://bissgro.com/contact-us',
+  },
 };
 
 export default function ContactUs() {

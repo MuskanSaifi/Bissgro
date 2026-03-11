@@ -1,3 +1,4 @@
+// components/SectionFields.js
 'use client';
 
 import ImageUpload from './ImageUpload';

@@ -44,7 +44,7 @@ export default function Header() {
           </div>
           <Link href="/portfolio">Portfolio</Link>
           <Link href="/plans">Our Packages</Link>
-          <Link href="/blog">Blog</Link>
+          <Link href="/blogs">Blogs</Link>
           <Link href="/about-us">About</Link>
           <Link href="/contact-us">Contact</Link>
         </nav>

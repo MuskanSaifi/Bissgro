@@ -1,6 +1,25 @@
 export const metadata = {
   title: 'Privacy Policy | Bissgro',
-  description: 'Bissgro Privacy Policy - How we collect, use, and protect your information.',
+  description:
+    'Bissgro Privacy Policy - How we collect, use, and protect your information.',
+
+  alternates: {
+    canonical: 'https://bissgro.com/privacy-policy',
+  },
+
+  openGraph: {
+    title: 'Privacy Policy | Bissgro',
+    description:
+      'Bissgro Privacy Policy - How we collect, use, and protect your information.',
+    url: 'https://bissgro.com/privacy-policy',
+    siteName: 'Bissgro',
+    type: 'website',
+  },
+
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 const mainStyle = { padding: '80px 20px', maxWidth: 900, margin: '0 auto' };

@@ -1,6 +1,20 @@
 export const metadata = {
   title: 'Terms & Conditions | Bissgro',
-  description: 'Bissgro Terms & Conditions - Service terms, payment, and usage policy.',
+  description:
+    'Bissgro Terms & Conditions - Service terms, payment, and usage policy.',
+
+  alternates: {
+    canonical: 'https://bissgro.com/terms-conditions',
+  },
+
+  openGraph: {
+    title: 'Terms & Conditions | Bissgro',
+    description:
+      'Bissgro Terms & Conditions - Service terms, payment, and usage policy.',
+    url: 'https://bissgro.com/terms-conditions',
+    siteName: 'Bissgro',
+    type: 'website',
+  },
 };
 
 const mainStyle = { padding: '80px 20px', maxWidth: 900, margin: '0 auto' };

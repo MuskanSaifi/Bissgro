@@ -22,7 +22,21 @@ async function getBlogs() {
 
 export const metadata = {
   title: 'Blog | Bissgro - Latest Articles & Insights',
-  description: 'Read our latest blog posts about web development, app development, SEO, and digital marketing tips.',
+  description:
+    'Read our latest blog posts about web development, app development, SEO, and digital marketing tips.',
+
+  alternates: {
+    canonical: 'https://bissgro.com/blogs',
+  },
+
+  openGraph: {
+    title: 'Blogs | Bissgro - Latest Articles & Insights',
+    description:
+      'Read our latest blog posts about web development, app development, SEO, and digital marketing tips.',
+    url: 'https://bissgro.com/blogs',
+    siteName: 'Bissgro',
+    type: 'website',
+  },
 };
 
 export default async function BlogPage() {
@@ -43,7 +57,7 @@ export default async function BlogPage() {
               {blogs.map((blog) => (
                 <Link
                   key={blog._id}
-                  href={`/blog/${blog.slug}`}
+                  href={`/blogs/${blog.slug}`}
                   className="blog-card-link"
                   style={{
                     background: '#fff',

@@ -1,8 +1,26 @@
 export const metadata = {
   title: 'Shipping & Delivery Policy | Bissgro',
-  description: 'Bissgro Shipping & Delivery Policy - How we deliver digital services and projects.',
-};
+  description:
+    'Bissgro Shipping & Delivery Policy - How we deliver digital services and projects.',
 
+  alternates: {
+    canonical: 'https://bissgro.com/shipping-policy',
+  },
+
+  openGraph: {
+    title: 'Shipping & Delivery Policy | Bissgro',
+    description:
+      'Bissgro Shipping & Delivery Policy - How we deliver digital services and projects.',
+    url: 'https://bissgro.com/shipping-policy',
+    siteName: 'Bissgro',
+    type: 'website',
+  },
+
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 const mainStyle = { padding: '80px 20px', maxWidth: 900, margin: '0 auto' };
 const h1Style = { fontFamily: "'Playfair Display', serif", fontSize: 40, marginBottom: 30 };
 const h2Style = { fontSize: 24, marginBottom: 15 };

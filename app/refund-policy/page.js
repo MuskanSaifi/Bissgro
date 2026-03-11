@@ -1,6 +1,23 @@
 export const metadata = {
   title: 'Refund Policy | Bissgro',
   description: 'Bissgro Refund Policy - Eligibility, process, and contact for refunds.',
+
+  alternates: {
+    canonical: 'https://bissgro.com/refund-policy',
+  },
+
+  openGraph: {
+    title: 'Refund Policy | Bissgro',
+    description: 'Bissgro Refund Policy - Eligibility, process, and contact for refunds.',
+    url: 'https://bissgro.com/refund-policy',
+    siteName: 'Bissgro',
+    type: 'website',
+  },
+
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 const mainStyle = { padding: '80px 20px', maxWidth: 900, margin: '0 auto' };

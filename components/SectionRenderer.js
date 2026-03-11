@@ -1,3 +1,4 @@
+// components/SectionRenderer.js
 import Link from 'next/link';
 import ContactForm from './ContactForm';
 import NewsletterForm from './NewsletterForm';

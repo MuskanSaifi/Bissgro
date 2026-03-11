@@ -24,21 +24,49 @@ async function getBlog(slug) {
 
 export async function generateMetadata({ params }) {
   const blog = await getBlog(params.slug);
+
   if (!blog) {
     return { title: 'Blog Not Found | Bissgro' };
   }
+
+  const baseUrl = getBaseUrl();
+
   const title = blog.metaTitle || `${blog.title} | Bissgro Blog`;
-  const description = blog.metaDescription || blog.excerpt || blog.content.replace(/<[^>]*>/g, '').substring(0, 160);
+  const description =
+    blog.metaDescription ||
+    blog.excerpt ||
+    blog.content.replace(/<[^>]*>/g, '').substring(0, 160);
+
   const ogImage = blog.metaImage || blog.image;
+
+  const canonicalUrl = blog.canonicalUrl || `${baseUrl}/blogs/${blog.slug}`;
+
   const metadata = {
     title,
     description,
     keywords: blog.metaKeywords || undefined,
+
+    alternates: {
+      canonical: canonicalUrl,
+    },
+
     openGraph: {
       title: blog.metaTitle || blog.title,
       description,
-      images: [ogImage],
+      url: canonicalUrl,
+      siteName: 'Bissgro',
+      type: 'article',
+      publishedTime: blog.createdAt,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
     },
+
     twitter: {
       card: 'summary_large_image',
       title: blog.metaTitle || blog.title,
@@ -46,12 +74,14 @@ export async function generateMetadata({ params }) {
       images: [ogImage],
     },
   };
+
   if (blog.robots) {
-    metadata.robots = blog.robots === 'noindex,nofollow' ? 'noindex, nofollow' : blog.robots.replace(/,/g, ', ');
+    metadata.robots =
+      blog.robots === 'noindex,nofollow'
+        ? 'noindex, nofollow'
+        : blog.robots.replace(/,/g, ', ');
   }
-  if (blog.canonicalUrl) {
-    metadata.alternates = { canonical: blog.canonicalUrl };
-  }
+
   return metadata;
 }
 
