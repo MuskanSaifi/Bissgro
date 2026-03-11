@@ -42,7 +42,7 @@ export default function Header() {
               <a href="#">Graphics Service</a>
             </div>
           </div>
-          <a href="#">Portfolio</a>
+          <Link href="/portfolio">Portfolio</Link>
           <Link href="/plans">Our Packages</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/about-us">About</Link>

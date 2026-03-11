@@ -8,7 +8,6 @@ const defaultServices = [
   { icon: '#ea580c', img: '/assets/services/APP.jpg', title: 'App Development', desc: 'Native & cross-platform apps for iOS and Android.', linkText: 'App Development', linkUrl: '#' },
   { icon: '#16a34a', img: '/assets/services/SEO.jpg', title: 'Search Engine Optimization', desc: 'Improve your visibility and grow organic traffic.', linkText: 'SEO', linkUrl: '/best-seo-services-in-noida' },
   { icon: '#7c3aed', img: '/assets/services/SMO.jpg', title: 'Social Media Optimization', desc: 'Engaging content and social growth strategies.', linkText: 'SMO', linkUrl: '#' },
-
 ];
 
 const defaultTech = [

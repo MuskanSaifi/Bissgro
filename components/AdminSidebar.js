@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { FiBarChart2, FiFileText, FiHome, FiPlus, FiMail } from 'react-icons/fi';
+import { FiBarChart2, FiFileText, FiPlus, FiMail, FiBriefcase } from 'react-icons/fi';
 
 export default function AdminSidebar() {
   const pathname = usePathname();
@@ -36,6 +36,7 @@ export default function AdminSidebar() {
     { href: '/admin/dashboard/blogs', label: 'Blogs', Icon: FiFileText },
     { href: '/admin/dashboard/create-blog', label: 'Create Blog', Icon: FiPlus },
     { href: '/admin/dashboard/plans', label: 'Pricing Plans', Icon: FiBarChart2 },
+    { href: '/admin/dashboard/projects', label: 'Our Projects', Icon: FiBriefcase },
     { href: '/admin/dashboard/leads', label: 'Leads', Icon: FiMail },
   ];
 
