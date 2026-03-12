@@ -26,14 +26,14 @@ export const metadata = {
     'Read our latest blog posts about web development, app development, SEO, and digital marketing tips.',
 
   alternates: {
-    canonical: 'https://bissgro.com/blogs',
+    canonical: 'https://www.bissgro.com/blogs',
   },
 
   openGraph: {
     title: 'Blogs | Bissgro - Latest Articles & Insights',
     description:
       'Read our latest blog posts about web development, app development, SEO, and digital marketing tips.',
-    url: 'https://bissgro.com/blogs',
+    url: 'https://www.bissgro.com/blogs',
     siteName: 'Bissgro',
     type: 'website',
   },

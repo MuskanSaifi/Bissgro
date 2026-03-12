@@ -4,14 +4,14 @@ export const metadata = {
     'Bissgro Terms & Conditions - Service terms, payment, and usage policy.',
 
   alternates: {
-    canonical: 'https://bissgro.com/terms-conditions',
+    canonical: 'https://www.bissgro.com/terms-conditions',
   },
 
   openGraph: {
     title: 'Terms & Conditions | Bissgro',
     description:
       'Bissgro Terms & Conditions - Service terms, payment, and usage policy.',
-    url: 'https://bissgro.com/terms-conditions',
+    url: 'https://www.bissgro.com/terms-conditions',
     siteName: 'Bissgro',
     type: 'website',
   },

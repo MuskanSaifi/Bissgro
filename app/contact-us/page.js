@@ -6,12 +6,12 @@ export const metadata = {
     'Have questions or need assistance? Contact Bissgro today. Our team is ready to help you with web development, digital solutions, and more.',
 
   alternates: {
-    canonical: 'https://bissgro.com/contact-us',
+    canonical: 'https://www.bissgro.com/contact-us',
   },
 
   openGraph: {
     title: 'Contact Us | Bissgro',
-    url: 'https://bissgro.com/contact-us',
+    url: 'https://www.bissgro.com/contact-us',
   },
 };
 

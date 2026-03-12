@@ -6,12 +6,12 @@ export const metadata = {
     "Choose from Bissgro's affordable pricing plans for Web Development, App Development, and SEO services. Secure payment options available.",
 
   alternates: {
-    canonical: 'https://bissgro.com/plans',
+    canonical: 'https://www.bissgro.com/plans',
   },
 
   openGraph: {
     title: 'Pricing & Plans | Bissgro',
-    url: 'https://bissgro.com/plans',
+    url: 'https://www.bissgro.com/plans',
     siteName: 'Bissgro',
     type: 'website',
   },

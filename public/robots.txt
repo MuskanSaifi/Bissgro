@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bissgro.com/sitemap.xml
+Sitemap: https://www.bissgro.com/sitemap.xml

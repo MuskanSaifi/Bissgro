@@ -3,13 +3,13 @@ export const metadata = {
   description: 'Bissgro Refund Policy - Eligibility, process, and contact for refunds.',
 
   alternates: {
-    canonical: 'https://bissgro.com/refund-policy',
+    canonical: 'https://www.bissgro.com/refund-policy',
   },
 
   openGraph: {
     title: 'Refund Policy | Bissgro',
     description: 'Bissgro Refund Policy - Eligibility, process, and contact for refunds.',
-    url: 'https://bissgro.com/refund-policy',
+    url: 'https://www.bissgro.com/refund-policy',
     siteName: 'Bissgro',
     type: 'website',
   },

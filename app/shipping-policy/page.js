@@ -4,14 +4,14 @@ export const metadata = {
     'Bissgro Shipping & Delivery Policy - How we deliver digital services and projects.',
 
   alternates: {
-    canonical: 'https://bissgro.com/shipping-policy',
+    canonical: 'https://www.bissgro.com/shipping-policy',
   },
 
   openGraph: {
     title: 'Shipping & Delivery Policy | Bissgro',
     description:
       'Bissgro Shipping & Delivery Policy - How we deliver digital services and projects.',
-    url: 'https://bissgro.com/shipping-policy',
+    url: 'https://www.bissgro.com/shipping-policy',
     siteName: 'Bissgro',
     type: 'website',
   },

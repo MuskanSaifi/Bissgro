@@ -4,14 +4,14 @@ export const metadata = {
     'Bissgro Privacy Policy - How we collect, use, and protect your information.',
 
   alternates: {
-    canonical: 'https://bissgro.com/privacy-policy',
+    canonical: 'https://www.bissgro.com/privacy-policy',
   },
 
   openGraph: {
     title: 'Privacy Policy | Bissgro',
     description:
       'Bissgro Privacy Policy - How we collect, use, and protect your information.',
-    url: 'https://bissgro.com/privacy-policy',
+    url: 'https://www.bissgro.com/privacy-policy',
     siteName: 'Bissgro',
     type: 'website',
   },

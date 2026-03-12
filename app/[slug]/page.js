@@ -5,7 +5,7 @@ import Link from 'next/link';
 const RESERVED = ['blog', 'admin', 'api', 'contact-us', 'about-us', 'plans', 'privacy-policy', 'refund-policy', 'shipping-policy', 'terms-conditions'];
 
 function getBaseUrl() {
-  if (process.env.NEXT_PUBLIC_BASE_URL)  return process.env.NEXT_PUBLIC_BASE_URL || 'https://bissgro.com';
+  if (process.env.NEXT_PUBLIC_BASE_URL)  return process.env.NEXT_PUBLIC_BASE_URL || 'https://www.bissgro.com';
   if (typeof window !== 'undefined') {
     return window.location.origin;
   }
