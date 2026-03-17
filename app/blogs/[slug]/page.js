@@ -45,7 +45,6 @@ export async function generateMetadata({ params }) {
     title,
     description,
     keywords: blog.metaKeywords || undefined,
-
     alternates: {
       canonical: canonicalUrl,
     },
@@ -81,13 +80,11 @@ export async function generateMetadata({ params }) {
         ? 'noindex, nofollow'
         : blog.robots.replace(/,/g, ', ');
   }
-
   return metadata;
 }
 
 export default async function BlogPost({ params }) {
   const blog = await getBlog(params.slug);
-
   if (!blog) {
     notFound();
   }
