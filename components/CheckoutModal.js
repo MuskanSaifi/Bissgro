@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Script from 'next/script';
 
-const RAZORPAY_KEY = 'rzp_test_S7f24Va8pdX661';
+const RAZORPAY_KEY = 'rzp_live_SSESGGycRc65UK';
 
 function generateInvoice(paymentResponse, orderData) {
   const invoiceNumber = 'INV-' + Date.now();
