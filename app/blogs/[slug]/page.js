@@ -1,20 +1,26 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 
-function getBaseUrl() {
-  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  const port = process.env.PORT || 3000;
-  return `http://localhost:${port}`;
-}
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL || 'https://www.bissgro.com';
 
 async function getBlog(slug) {
   try {
-    const res = await fetch(`${getBaseUrl()}/api/blogs`, {
+    const res = await fetch(`${BASE_URL}/api/blogs`, {
       cache: 'no-store',
     });
+
+    if (!res.ok) {
+      console.error('Failed to fetch blogs');
+      return null;
+    }
+
     const data = await res.json();
-    const blog = data.blogs?.find((b) => b.slug === slug && b.published);
+
+    const blog = data.blogs?.find(
+      (b) => b.slug === slug && b.published
+    );
+
     return blog || null;
   } catch (error) {
     console.error('Error fetching blog:', error);
@@ -29,9 +35,8 @@ export async function generateMetadata({ params }) {
     return { title: 'Blog Not Found | Bissgro' };
   }
 
-  const baseUrl = getBaseUrl();
-
   const title = blog.metaTitle || `${blog.title} | Bissgro Blog`;
+
   const description =
     blog.metaDescription ||
     blog.excerpt ||
@@ -39,12 +44,14 @@ export async function generateMetadata({ params }) {
 
   const ogImage = blog.metaImage || blog.image;
 
-  const canonicalUrl = blog.canonicalUrl || `${baseUrl}/blogs/${blog.slug}`;
+  const canonicalUrl =
+    blog.canonicalUrl || `${BASE_URL}/blogs/${blog.slug}`;
 
   const metadata = {
     title,
     description,
     keywords: blog.metaKeywords || undefined,
+
     alternates: {
       canonical: canonicalUrl,
     },
@@ -80,53 +87,100 @@ export async function generateMetadata({ params }) {
         ? 'noindex, nofollow'
         : blog.robots.replace(/,/g, ', ');
   }
+
   return metadata;
 }
 
 export default async function BlogPost({ params }) {
   const blog = await getBlog(params.slug);
+
   if (!blog) {
     notFound();
   }
 
   return (
     <div style={{ paddingTop: '90px', minHeight: '100vh' }}>
-        <article style={{ maxWidth: '900px', margin: '0 auto', padding: '40px 20px' }}>
-          <Link href="/blog" style={{ color: 'var(--accent)', textDecoration: 'none', marginBottom: '20px', display: 'inline-block' }}>
-            ← Back to Blog
-          </Link>
+      <article
+        style={{
+          maxWidth: '900px',
+          margin: '0 auto',
+          padding: '40px 20px',
+        }}
+      >
+        <Link
+          href="/blogs"
+          style={{
+            color: 'var(--accent)',
+            textDecoration: 'none',
+            marginBottom: '20px',
+            display: 'inline-block',
+          }}
+        >
+          ← Back to Blog
+        </Link>
 
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: '42px', marginBottom: '20px', lineHeight: 1.2 }}>
-            {blog.title}
-          </h1>
+        <h1
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: '42px',
+            marginBottom: '20px',
+            lineHeight: 1.2,
+          }}
+        >
+          {blog.title}
+        </h1>
 
-          <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '30px', color: '#666', fontSize: '14px' }}>
-            <span>{new Date(blog.createdAt).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-            <span>•</span>
-            <span>{blog.views || 0} views</span>
-            {blog.author?.username && (
-              <>
-                <span>•</span>
-                <span>By {blog.author.username}</span>
-              </>
-            )}
-          </div>
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            alignItems: 'center',
+            marginBottom: '30px',
+            color: '#666',
+            fontSize: '14px',
+          }}
+        >
+          <span>
+            {new Date(blog.createdAt).toLocaleDateString('en-IN', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </span>
 
-          <img
-            src={blog.image}
-            alt={blog.title}
-            style={{ width: '100%', borderRadius: '12px', marginBottom: '40px', boxShadow: 'var(--card-shadow)' }}
-          />
+          <span>•</span>
+          <span>{blog.views || 0} views</span>
 
-          <div
-            style={{
-              fontSize: '18px',
-              lineHeight: 1.8,
-              color: 'var(--text)',
-            }}
-            dangerouslySetInnerHTML={{ __html: blog.content.replace(/\n/g, '<br />') }}
-          />
-        </article>
+          {blog.author?.username && (
+            <>
+              <span>•</span>
+              <span>By {blog.author.username}</span>
+            </>
+          )}
+        </div>
+
+        <img
+          src={blog.image}
+          alt={blog.title}
+          style={{
+            width: '100%',
+            borderRadius: '12px',
+            marginBottom: '40px',
+            boxShadow: 'var(--card-shadow)',
+          }}
+        />
+
+        <div
+          style={{
+            fontSize: '18px',
+            lineHeight: 1.8,
+            color: 'var(--text)',
+          }}
+          dangerouslySetInnerHTML={{
+            __html: blog.content.replace(/\n/g, '<br />'),
+          }}
+        />
+      </article>
     </div>
   );
 }
