@@ -33,6 +33,7 @@ export default function Footer() {
           <h4>Useful Links</h4>
           <ul>
             <li><Link href="/">Menu</Link></li>
+            <li><Link href="/blog">Blogs</Link></li>
             <li><Link href="/about-us">About us</Link></li>
             <li><Link href="/contact-us">Contact us</Link></li>
             <li><Link href="/portfolio">Portfolio</Link></li>

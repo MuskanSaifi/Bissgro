@@ -56,7 +56,7 @@ export default async function BlogPage() {
               {blogs.map((blog) => (
                 <Link
                   key={blog._id}
-                  href={`/blogs/${blog.slug}`}
+                  href={`/blog/${blog.slug}`}
                   className="blog-card-link"
                   style={{
                     background: '#fff',
