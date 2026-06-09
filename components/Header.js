@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-const WHATSAPP_URL = 'https://wa.me/917303981193?text=Hello%20I%20want%20to%20know%20more%20about%20your%20services';
+const WHATSAPP_URL = 'https://wa.me/919540111126?text=Hello%20I%20want%20to%20know%20more%20about%20your%20services';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);

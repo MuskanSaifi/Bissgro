@@ -1,5 +1,5 @@
 export default function WhatsAppFloat() {
-  const url = 'https://wa.me/917303981193?text=Hello%20I%20am%20interested%20in%20your%20services';
+  const url = 'https://wa.me/919540111126?text=Hello%20I%20am%20interested%20in%20your%20services';
   return (
     <a
       href={url}

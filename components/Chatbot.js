@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 
-const WHATSAPP_LEAD = 'https://wa.me/917303981193';
+const WHATSAPP_LEAD = 'https://wa.me/919540111126';
 
 function addStrong(str) {
   return str.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
@@ -141,7 +141,7 @@ export default function Chatbot() {
     } else if (reply === 'View Pricing') {
       window.location.href = '/plans';
     } else if (reply === 'Contact Info') {
-      addBot('📍 Address: 44, Block-H, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 73039 81193\n📧 Email: info@bissgro.com');
+      addBot('📍 Address: 44, Block-H, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 95401 11126\n📧 Email: info@bissgro.com');
     } else {
       handleUserInput(reply);
     }
@@ -188,7 +188,7 @@ export default function Chatbot() {
       } else if (lower.includes('pricing') || lower.includes('price')) {
         addBot("Check out our pricing page for all package details!", ['View Pricing']);
       } else if (lower.includes('contact')) {
-        addBot('📍 Address: 44, Block-H, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 73039 81193\n📧 Email: info@bissgro.com');
+        addBot('📍 Address: 44, Block-H, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 95401 11126\n📧 Email: info@bissgro.com');
       } else {
         addBot("I'm here to help you get started! Please select a service option above.", ['Web Development', 'App Development', 'SEO Service']);
       }

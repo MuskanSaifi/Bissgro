@@ -233,7 +233,7 @@ function sendInvoiceViaEmail(orderData, invoice) {
     `Our team will contact you shortly to proceed with your project.\n\n` +
     `Best regards,\n` +
     `Bissgro Team\n` +
-    `Phone: +91 73039 81193\n` +
+    `Phone: +91 95401 11126\n` +
     `Email: info@bissgro.com`;
 
   // In production, use backend API to send email
