@@ -395,7 +395,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (lowerInput.includes("pricing") || lowerInput.includes("price")) {
           addBotMessage("Check out our <a href='./plans.html' style='color: var(--accent); text-decoration: underline;'>pricing page</a> for all package details!");
         } else if (lowerInput.includes("contact")) {
-          addBotMessage("📍 Address: 44, Block-H, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 95401 11126\n📧 Email: info@bissgro.com");
+          addBotMessage("📍 Address: 44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 95401 11126\n📧 Email: info@bissgro.com");
         } else {
           addBotMessage("I'm here to help you get started! Please select a service option above.", [
             "Web Development",
@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (reply === "View Pricing") {
         window.location.href = "./plans.html";
       } else if (reply === "Contact Info") {
-        addBotMessage("📍 Address: 44, Block-H, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 95401 11126\n📧 Email: info@bissgro.com");
+        addBotMessage("📍 Address: 44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 95401 11126\n📧 Email: info@bissgro.com");
       } else {
         handleUserInput(reply);
       }

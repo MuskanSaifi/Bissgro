@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="footer-grid">
         <div className="brand-block">
           <img src="/assets/logo.png" alt="Bissgro logo" />
-          <p>44, Block-H, Noida, Uttar Pradesh, India, 201301</p>
+          <p>44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301</p>
           <div className="footer-follow-legal">
             <h4>FOLLOW US</h4>
             <div className="socials d-flex">

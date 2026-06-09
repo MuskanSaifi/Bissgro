@@ -72,7 +72,7 @@ export default function ShippingPolicy() {
 
       <section style={{ marginBottom: 40 }}>
         <h2 style={h2Style}>6. Contact</h2>
-        <p><strong>Bissgro</strong><br />44, Block-H, Noida, Uttar Pradesh, India, 201301<br />Phone: +91 95401 11126<br />Email: info@bissgro.com<br />WhatsApp: <a href="https://wa.me/919540111126" target="_blank" rel="noopener noreferrer">+91 95401 11126</a></p>
+        <p><strong>Bissgro</strong><br />44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301<br />Phone: +91 95401 11126<br />Email: info@bissgro.com<br />WhatsApp: <a href="https://wa.me/919540111126" target="_blank" rel="noopener noreferrer">+91 95401 11126</a></p>
       </section>
     </main>
   );

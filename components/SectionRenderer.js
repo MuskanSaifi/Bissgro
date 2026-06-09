@@ -225,7 +225,7 @@ export default function SectionRenderer({ section }) {
                 <img src="/assets/contact.png" className="img-fluid px-5" alt="Contact" />
               </div>
               <ul className="info-list">
-                <li><i className="fas fa-map-marker-alt"></i> {c.address || '44, Block-H, Noida, Uttar Pradesh, India, 201301'}</li>
+                <li><i className="fas fa-map-marker-alt"></i> {c.address || '44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301'}</li>
                 <li><i className="fas fa-phone"></i> {c.phone || '+91 95401 11126'}</li>
                 <li><i className="fas fa-envelope"></i> {c.email || 'info@bissgro.com'}</li>
               </ul>
