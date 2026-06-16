@@ -54,7 +54,7 @@ export default function RefundPolicy() {
 
       <section style={{ marginBottom: 40 }}>
         <h2 style={h2Style}>4. Refund Process</h2>
-        <p>To request a refund, contact us via email (info@bissgro.com), phone (+91 95401 11126), or <a href="https://wa.me/919540111126" target="_blank" rel="noopener noreferrer">WhatsApp</a>. Include your order/invoice number and reason. Refunds are processed to the original payment method within 7-10 business days.</p>
+        <p>To request a refund, contact us via email (info@bissgro.com), phone (+91 73039 81193), or <a href="https://wa.me/917303981193" target="_blank" rel="noopener noreferrer">WhatsApp</a>. Include your order/invoice number and reason. Refunds are processed to the original payment method within 7-10 business days.</p>
       </section>
 
       <section style={{ marginBottom: 40 }}>
@@ -64,7 +64,7 @@ export default function RefundPolicy() {
 
       <section style={{ marginBottom: 40 }}>
         <h2 style={h2Style}>6. Contact</h2>
-        <p><strong>Bissgro</strong><br />44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301<br />Phone: +91 95401 11126<br />Email: info@bissgro.com<br />WhatsApp: <a href="https://wa.me/919540111126" target="_blank" rel="noopener noreferrer">+91 95401 11126</a></p>
+        <p><strong>Bissgro</strong><br />44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301<br />Phone: +91 73039 81193<br />Email: info@bissgro.com<br />WhatsApp: <a href="https://wa.me/917303981193" target="_blank" rel="noopener noreferrer">+91 73039 81193</a></p>
       </section>
     </main>
   );

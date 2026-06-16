@@ -31,14 +31,14 @@ export default function ContactUs() {
             </div>
             <ul className="info-list">
               <li><i className="fas fa-map-marker-alt"></i> 44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301</li>
-              <li><i className="fas fa-phone"></i> +91 95401 11126</li>
+              <li><i className="fas fa-phone"></i> +91 73039 81193</li>
               <li><i className="fas fa-envelope"></i> info@bissgro.com</li>
             </ul>
             <div className="social-icons">
               <a href="https://www.facebook.com/share/1B17ghvWih/?mibextid=wwXIfr"><i className="fab fa-facebook-f"></i></a>
               <a href="#"><i className="fab fa-twitter"></i></a>
               <a href="https://www.instagram.com/bissgro?igsh=YW5sYmRsZHRjMWxh&utm_source=qr"><i className="fab fa-instagram"></i></a>
-              <a href="https://wa.me/919540111126?text=Hello%20I%20am%20interested%20in%20your%20services" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp"></i></a>
+              <a href="https://wa.me/917303981193?text=Hello%20I%20am%20interested%20in%20your%20services" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp"></i></a>
             </div>
           </div>
         </div>

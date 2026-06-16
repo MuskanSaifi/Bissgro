@@ -19,7 +19,7 @@ export default function Footer() {
               <a href="#" aria-label="Twitter">
                 <i className="fab fa-twitter"></i>
               </a>
-              <a href="https://wa.me/919540111126?text=Hello%20I%20am%20interested%20in%20your%20services" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/917303981193?text=Hello%20I%20am%20interested%20in%20your%20services" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-whatsapp"></i>
               </a>
             </div>
