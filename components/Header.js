@@ -8,7 +8,6 @@ const WHATSAPP_URL = 'https://wa.me/917303981193?text=Hello%20I%20want%20a%20fre
 
 export default function Header() {
   const pathname = usePathname();
-  const isHome = pathname === '/';
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -50,7 +49,7 @@ export default function Header() {
   };
 
   return (
-    <header className={`site-header ${isHome ? 'home-header' : ''}`} role="banner">
+    <header className="site-header home-header" role="banner">
       <div className="header-inner">
         <div className="logo">
           <Link href="/">
@@ -69,7 +68,7 @@ export default function Header() {
         </button>
 
         <nav className={`main-nav ${menuOpen ? 'open' : ''}`} role="navigation" aria-label="Main">
-          {isHome && navLink('/', 'Home', true)}
+          {navLink('/', 'Home', true)}
           {navLink('/about-us', 'About Us')}
           <div ref={dropdownRef} className={`dropdown ${servicesOpen ? 'open' : ''}`}>
             <button
@@ -91,20 +90,18 @@ export default function Header() {
             </div>
           </div>
           <Link href="/portfolio" onClick={closeMenu}>Portfolio</Link>
-          {isHome && (
-            <a href="#portfolio" onClick={closeMenu}>Case Studies</a>
-          )}
+          <Link href="/#portfolio" onClick={closeMenu}>Case Studies</Link>
           <Link href="/blog" onClick={closeMenu}>Blog</Link>
           <Link href="/contact-us" onClick={closeMenu}>Contact Us</Link>
         </nav>
 
         <a
-          className={isHome ? 'btn-quote' : 'btn-book'}
+          className="btn-quote"
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
         >
-          {isHome ? 'Get Free Quote' : 'Contact Us'}
+          Get Free Quote
         </a>
       </div>
     </header>
