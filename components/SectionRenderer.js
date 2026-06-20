@@ -72,7 +72,7 @@ export default function SectionRenderer({ section }) {
           </div>
           <div className="hero-right">
             <div className="hero-card hero-visual">
-              <img src={c.image || '/assets/banner/banner.jpeg'} alt="Hero" className="img-fluid" />
+              <img src={c.image || '/assets/banner/banner.png'} alt="Hero" className="img-fluid" />
             </div>
           </div>
         </section>
