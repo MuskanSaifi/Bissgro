@@ -16,6 +16,7 @@ const RESERVED = [
   'refund-policy',
   'shipping-policy',
   'terms-conditions',
+  'duns-number',
 ];
 
 async function getPage(slug) {

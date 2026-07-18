@@ -1384,3 +1384,17 @@ footer.site-footer.home-footer .footer-bottom a:hover {
   .home-hero-stats { grid-template-columns: 1fr; }
   .home-hero-badge { display: none; }
 }
+
+/* ---------- DUNS landing (3-step process) ---------- */
+.duns-process-steps {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 900px) {
+  .duns-process-steps {
+    grid-template-columns: 1fr;
+  }
+}
