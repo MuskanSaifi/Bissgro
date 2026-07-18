@@ -103,7 +103,7 @@ export default function Footer() {
           </div>
           <div className="footer-contact-item">
             <i className="fas fa-phone" />
-            <a href="tel:+917303981193">+91 73039 81193</a>
+            <a href="tel:+919625945041">+91 96259 45041</a>
           </div>
           <div className="footer-contact-item">
             <i className="fas fa-envelope" />

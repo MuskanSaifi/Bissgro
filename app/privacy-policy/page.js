@@ -85,7 +85,7 @@ export default function PrivacyPolicy() {
 
       <section style={{ marginBottom: 40 }}>
         <h2 style={h2Style}>9. Contact</h2>
-        <p><strong>Bissgro</strong><br />44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301<br />Phone: +91 73039 81193<br />Email: info@bissgro.com<br />WhatsApp: <a href="https://wa.me/917303981193" target="_blank" rel="noopener noreferrer">+91 73039 81193</a></p>
+        <p><strong>Bissgro</strong><br />44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301<br />Phone: +91 96259 45041<br />Email: info@bissgro.com<br />WhatsApp: <a href="https://wa.me/919625945041" target="_blank" rel="noopener noreferrer">+91 96259 45041</a></p>
       </section>
     </main>
   );

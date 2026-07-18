@@ -14,7 +14,7 @@ export default function ContactForm() {
     const phone = form.querySelector('#phone')?.value || '';
     const message = form.querySelector('#message')?.value || '';
     const text = `Hello, I have an enquiry.%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
-    window.open(`https://wa.me/917303981193?text=${text}`, '_blank');
+    window.open(`https://wa.me/919625945041?text=${text}`, '_blank');
   };
 
   return (

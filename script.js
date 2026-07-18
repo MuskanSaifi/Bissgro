@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const phone = document.getElementById("phone").value;
       const message = document.getElementById("message").value;
       const text = `Hello, I have an enquiry.%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
-      window.open(`https://wa.me/917303981193?text=${text}`, "_blank");
+      window.open(`https://wa.me/919625945041?text=${text}`, "_blank");
     });
   }
 
@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
         // Open WhatsApp with formatted message
         const whatsappMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/917303981193?text=${whatsappMessage}`, "_blank");
+        window.open(`https://wa.me/919625945041?text=${whatsappMessage}`, "_blank");
         
         // Reset for new lead
         setTimeout(() => {
@@ -395,7 +395,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (lowerInput.includes("pricing") || lowerInput.includes("price")) {
           addBotMessage("Check out our <a href='./plans.html' style='color: var(--accent); text-decoration: underline;'>pricing page</a> for all package details!");
         } else if (lowerInput.includes("contact")) {
-          addBotMessage("📍 Address: 44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 73039 81193\n📧 Email: info@bissgro.com");
+          addBotMessage("📍 Address: 44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 96259 45041\n📧 Email: info@bissgro.com");
         } else {
           addBotMessage("I'm here to help you get started! Please select a service option above.", [
             "Web Development",
@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (reply === "View Pricing") {
         window.location.href = "./plans.html";
       } else if (reply === "Contact Info") {
-        addBotMessage("📍 Address: 44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 73039 81193\n📧 Email: info@bissgro.com");
+        addBotMessage("📍 Address: 44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301\n📞 Phone: +91 96259 45041\n📧 Email: info@bissgro.com");
       } else {
         handleUserInput(reply);
       }

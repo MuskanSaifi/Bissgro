@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 
-const WHATSAPP_URL = 'https://wa.me/917303981193?text=Hello%20I%20want%20a%20free%20quote';
+const WHATSAPP_URL = 'https://wa.me/919625945041?text=Hello%20I%20want%20a%20free%20quote';
 
 export default function Header() {
   const pathname = usePathname();

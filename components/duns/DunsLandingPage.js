@@ -2,7 +2,7 @@ import ContactForm from '@/components/ContactForm';
 import DunsFaq from './DunsFaq';
 
 const WA =
-  'https://wa.me/917303981193?text=Hi%2C%20I%20want%20to%20get%20a%20DUNS%20Number';
+  'https://wa.me/919625945041?text=Hi%2C%20I%20want%20to%20get%20a%20DUNS%20Number';
 
 const HERO_STATS = [
   { value: '10,000+', label: 'Happy Clients' },
@@ -132,7 +132,7 @@ export default function DunsLandingPage() {
                 >
                   Get Your DUNS Number
                 </a>
-                <a href="tel:+917303981193" className="btn-home-outline">
+                <a href="tel:+919625945041" className="btn-home-outline">
                   <i className="fas fa-phone-alt" /> Talk to Expert
                 </a>
               </div>
@@ -322,7 +322,7 @@ export default function DunsLandingPage() {
               >
                 Get Started Now
               </a>
-              <a href="tel:+917303981193" className="btn-outline-white">
+              <a href="tel:+919625945041" className="btn-outline-white">
                 <i className="fas fa-phone-alt" /> Call Us Now
               </a>
             </div>
@@ -353,7 +353,7 @@ export default function DunsLandingPage() {
               </li>
               <li>
                 <i className="fas fa-phone" />{' '}
-                <a href="tel:+917303981193">+91 73039 81193</a>
+                <a href="tel:+919625945041">+91 96259 45041</a>
               </li>
               <li>
                 <i className="fas fa-envelope" />{' '}

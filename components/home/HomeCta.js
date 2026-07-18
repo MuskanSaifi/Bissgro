@@ -9,14 +9,14 @@ export default function HomeCta() {
           </div>
           <div className="home-cta-actions">
             <a
-              href="https://wa.me/917303981193?text=Hello%20I%20want%20a%20free%20quote"
+              href="https://wa.me/919625945041?text=Hello%20I%20want%20a%20free%20quote"
               className="btn-white"
               target="_blank"
               rel="noopener noreferrer"
             >
               Get Free Quote
             </a>
-            <a href="tel:+917303981193" className="btn-outline-white">
+            <a href="tel:+919625945041" className="btn-outline-white">
               <i className="fas fa-phone-alt" /> Call Us Now
             </a>
           </div>

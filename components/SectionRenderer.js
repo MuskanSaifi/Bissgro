@@ -53,7 +53,7 @@ export default function SectionRenderer({ section }) {
             <p className="hero-desc">{c.description || 'From custom website development to SEO and digital marketing.'}</p>
             <div className="hero-actions">
               <a className="btn-dark" href={c.ctaLink || '#'}>{c.ctaText || 'Get Free Consultation'}</a>
-              <a className="btn-book" href={c.secondaryCtaLink || 'https://wa.me/917303981193'} target="_blank" rel="noopener noreferrer">
+              <a className="btn-book" href={c.secondaryCtaLink || 'https://wa.me/919625945041'} target="_blank" rel="noopener noreferrer">
                 {c.secondaryCtaText || 'Request a Quote'}
               </a>
             </div>
@@ -204,7 +204,7 @@ export default function SectionRenderer({ section }) {
           <div className="panel" style={{ position: 'relative', zIndex: 1 }}>
             <h3>{c.title || "Let's Work Together"}</h3>
             <p>{c.description || ''}</p>
-            <a className="btn-book" href={c.buttonLink || 'https://wa.me/917303981193'} target="_blank" rel="noopener noreferrer">
+            <a className="btn-book" href={c.buttonLink || 'https://wa.me/919625945041'} target="_blank" rel="noopener noreferrer">
               {c.buttonText || 'Contact Us'}
             </a>
           </div>
@@ -226,7 +226,7 @@ export default function SectionRenderer({ section }) {
               </div>
               <ul className="info-list">
                 <li><i className="fas fa-map-marker-alt"></i> {c.address || '44, Block-H, Sector-63, Noida, Uttar Pradesh, India, 201301'}</li>
-                <li><i className="fas fa-phone"></i> {c.phone || '+91 73039 81193'}</li>
+                <li><i className="fas fa-phone"></i> {c.phone || '+91 96259 45041'}</li>
                 <li><i className="fas fa-envelope"></i> {c.email || 'info@bissgro.com'}</li>
               </ul>
             </div>

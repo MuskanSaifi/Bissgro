@@ -26,7 +26,7 @@ export default function HomeHero() {
                 Explore Our Services
               </Link>
               <a
-                href="https://wa.me/917303981193?text=Hello%20I%20want%20to%20talk%20to%20an%20expert"
+                href="https://wa.me/919625945041?text=Hello%20I%20want%20to%20talk%20to%20an%20expert"
                 className="btn-home-outline"
                 target="_blank"
                 rel="noopener noreferrer"
