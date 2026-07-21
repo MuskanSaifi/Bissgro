@@ -45,7 +45,7 @@ export async function generateMetadata({ params }) {
   const ogImage = blog.metaImage || blog.image;
 
   const canonicalUrl =
-    blog.canonicalUrl || `${BASE_URL}/blogs/${blog.slug}`;
+    blog.canonicalUrl || `${BASE_URL}/blog/${blog.slug}`;
 
   const metadata = {
     title,
@@ -108,7 +108,7 @@ export default async function BlogPost({ params }) {
         }}
       >
         <Link
-          href="/blogs"
+          href="/blog"
           style={{
             color: 'var(--accent)',
             textDecoration: 'none',

@@ -54,7 +54,7 @@ export async function PUT(request, { params }) {
     }
 
     const { id } = params;
-    const { title, content, excerpt, image, imagePublicId, contentImagePublicIds, metaTitle, metaDescription, metaKeywords, metaImage, canonicalUrl, focusKeyword, robots, published, deleteOldImage } = await request.json();
+    const { title, slug: customSlug, content, excerpt, image, imagePublicId, contentImagePublicIds, metaTitle, metaDescription, metaKeywords, metaImage, canonicalUrl, focusKeyword, robots, published, deleteOldImage } = await request.json();
 
     const blog = await Blog.findById(id);
     if (!blog) {
@@ -70,16 +70,21 @@ export async function PUT(request, { params }) {
       }
     }
 
-    // Update slug if title changed
+    // Keep the current slug unless a custom URL is supplied or the title changes.
     let slug = blog.slug;
-    if (title && title !== blog.title) {
-      slug = title
+    if (customSlug !== undefined || (title && title !== blog.title)) {
+      slug = (customSlug || title)
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/(^-|-$)/g, '');
+
+      if (!slug) {
+        return NextResponse.json({ error: 'Please enter a valid blog URL' }, { status: 400 });
+      }
+
       const existingBlog = await Blog.findOne({ slug, _id: { $ne: id } });
       if (existingBlog) {
-        return NextResponse.json({ error: 'A blog with this title already exists' }, { status: 400 });
+        return NextResponse.json({ error: 'This blog URL is already in use. Choose another URL.' }, { status: 400 });
       }
     }
 

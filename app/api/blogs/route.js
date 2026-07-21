@@ -45,22 +45,26 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Admin access required' }, { status: 403 });
     }
 
-    const { title, content, excerpt, image, imagePublicId, contentImagePublicIds, metaTitle, metaDescription, metaKeywords, metaImage, canonicalUrl, focusKeyword, robots, published } = await request.json();
+    const { title, slug: customSlug, content, excerpt, image, imagePublicId, contentImagePublicIds, metaTitle, metaDescription, metaKeywords, metaImage, canonicalUrl, focusKeyword, robots, published } = await request.json();
 
     if (!title || !content || !image) {
       return NextResponse.json({ error: 'Title, content, and image are required' }, { status: 400 });
     }
 
-    // Generate slug from title
-    const slug = title
+    // Use the custom URL slug when provided; otherwise generate it from the title.
+    const slug = (customSlug || title)
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
 
+    if (!slug) {
+      return NextResponse.json({ error: 'Please enter a valid blog URL' }, { status: 400 });
+    }
+
     // Check if slug exists
     const existingBlog = await Blog.findOne({ slug });
     if (existingBlog) {
-      return NextResponse.json({ error: 'A blog with this title already exists' }, { status: 400 });
+      return NextResponse.json({ error: 'This blog URL is already in use. Choose another URL.' }, { status: 400 });
     }
 
     const blog = await Blog.create({

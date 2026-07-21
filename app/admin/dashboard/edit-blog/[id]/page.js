@@ -9,6 +9,7 @@ export default function EditBlog() {
   const params = useParams();
   const router = useRouter();
   const [title, setTitle] = useState('');
+  const [slug, setSlug] = useState('');
   const [content, setContent] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [image, setImage] = useState('');
@@ -37,6 +38,7 @@ export default function EditBlog() {
 
       if (res.ok && data.blog) {
         setTitle(data.blog.title);
+        setSlug(data.blog.slug || '');
         setContent(data.blog.content);
         setExcerpt(data.blog.excerpt || '');
         setImage(data.blog.image);
@@ -138,6 +140,7 @@ export default function EditBlog() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title,
+          slug,
           content,
           excerpt,
           image,
@@ -190,6 +193,23 @@ export default function EditBlog() {
               required
               style={{ width: '100%', padding: '12px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '15px' }}
             />
+          </div>
+
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Custom Blog URL</label>
+            <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden' }}>
+              <span style={{ padding: '12px', background: '#f5f5f5', color: '#666', whiteSpace: 'nowrap' }}>/blog/</span>
+              <input
+                type="text"
+                value={slug}
+                onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/^-+/, ''))}
+                placeholder="custom-blog-page-url"
+                style={{ width: '100%', padding: '12px', border: 'none', outline: 'none', fontSize: '15px' }}
+              />
+            </div>
+            <p style={{ color: '#666', fontSize: '12px', marginTop: '5px' }}>
+              Changing this URL will change the public link for this blog.
+            </p>
           </div>
 
           <div style={{ marginBottom: '20px' }}>
