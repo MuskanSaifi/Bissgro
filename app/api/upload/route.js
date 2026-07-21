@@ -42,6 +42,7 @@ export async function POST(request) {
     );
   } catch (error) {
     console.error('Upload error:', error);
-    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+    const detail = error?.message || 'Unknown error';
+    return NextResponse.json({ error: `Upload failed: ${detail}` }, { status: 500 });
   }
 }

@@ -97,10 +97,10 @@ export default function EditBlog() {
         setImagePublicId(data.publicId);
         toast.success('Image uploaded successfully');
       } else {
-        toast.error(data.error || 'Upload failed');
+        toast.error(`Image upload failed: ${data.error || res.status}. Try again.`, { duration: 6000 });
       }
     } catch (error) {
-      toast.error('Upload failed');
+      toast.error('Image upload failed (network error). Try again.', { duration: 6000 });
     } finally {
       setUploading(false);
     }
@@ -112,8 +112,21 @@ export default function EditBlog() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !content || !image) {
-      toast.error('Please fill all required fields');
+    const plainContent = content.replace(/<[^>]*>/g, '').trim();
+    if (!title.trim()) {
+      toast.error('Title is required');
+      return;
+    }
+    if (!plainContent) {
+      toast.error('Content is required');
+      return;
+    }
+    if (uploading) {
+      toast.error('Image is still uploading, please wait...');
+      return;
+    }
+    if (!image) {
+      toast.error('Featured image is missing - upload may have failed. Please re-select the image.', { duration: 6000 });
       return;
     }
 
