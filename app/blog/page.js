@@ -1,18 +1,14 @@
 import Link from 'next/link';
+import connectDB from '@/lib/db';
+import Blog from '@/models/Blog';
 
 async function getBlogs() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blogs`, {
-      cache: 'no-store',
-    });
-
-    if (!res.ok) {
-      console.error('Failed to fetch blogs');
-      return [];
-    }
-
-    const data = await res.json();
-    return data.blogs || [];
+    await connectDB();
+    const blogs = await Blog.find({ published: true })
+      .sort({ createdAt: -1 })
+      .lean();
+    return blogs || [];
   } catch (error) {
     console.error('Error fetching blogs:', error);
     return [];

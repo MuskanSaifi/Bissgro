@@ -4,6 +4,11 @@ import { getTokenFromRequest, verifyToken } from '@/lib/auth';
 import User from '@/models/User';
 import connectDB from '@/lib/db';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+const MAX_FILE_BYTES = 8 * 1024 * 1024; // 8MB
+
 export async function POST(request) {
   try {
     await connectDB();
@@ -11,7 +16,7 @@ export async function POST(request) {
     const decoded = verifyToken(token);
 
     if (!decoded) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized. Please login again.' }, { status: 401 });
     }
 
     const user = await User.findById(decoded.userId);
@@ -23,8 +28,19 @@ export async function POST(request) {
     const file = formData.get('file');
     const folder = formData.get('folder') || 'blog';
 
-    if (!file) {
+    if (!file || typeof file === 'string') {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
+    }
+
+    if (!String(file.type || '').startsWith('image/')) {
+      return NextResponse.json({ error: 'Only image files are allowed' }, { status: 400 });
+    }
+
+    if (typeof file.size === 'number' && file.size > MAX_FILE_BYTES) {
+      return NextResponse.json(
+        { error: 'Image too large. Please upload an image under 8MB.' },
+        { status: 400 }
+      );
     }
 
     const bytes = await file.arrayBuffer();

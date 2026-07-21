@@ -34,6 +34,12 @@ export default function CreateBlog() {
       return;
     }
 
+    if (file.size > 8 * 1024 * 1024) {
+      toast.error('Image too large. Please use an image under 8MB.', { duration: 6000 });
+      e.target.value = '';
+      return;
+    }
+
     setUploading(true);
     const formData = new FormData();
     formData.append('file', file);
@@ -46,7 +52,15 @@ export default function CreateBlog() {
         credentials: 'include',
       });
 
-      const data = await res.json();
+      let data = {};
+      try {
+        data = await res.json();
+      } catch {
+        toast.error(`Image upload failed (server returned ${res.status}). Check Cloudinary env on live.`, { duration: 7000 });
+        setImage('');
+        setImagePublicId('');
+        return;
+      }
 
       if (res.ok) {
         setImage(data.url);
@@ -55,12 +69,12 @@ export default function CreateBlog() {
       } else {
         setImage('');
         setImagePublicId('');
-        toast.error(`Image upload failed: ${data.error || res.status}. Try again.`, { duration: 6000 });
+        toast.error(`Image upload failed: ${data.error || res.status}. Try again.`, { duration: 7000 });
       }
     } catch (error) {
       setImage('');
       setImagePublicId('');
-      toast.error('Image upload failed (network error). Try again.', { duration: 6000 });
+      toast.error(`Image upload failed: ${error?.message || 'network error'}. Try again.`, { duration: 7000 });
     } finally {
       setUploading(false);
     }

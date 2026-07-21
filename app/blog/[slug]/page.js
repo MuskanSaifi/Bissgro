@@ -1,27 +1,23 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import connectDB from '@/lib/db';
+import Blog from '@/models/Blog';
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || 'https://www.bissgro.com';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.bissgro.com';
 
 async function getBlog(slug) {
   try {
-    const res = await fetch(`${BASE_URL}/api/blogs`, {
-      cache: 'no-store',
-    });
+    await connectDB();
+    const blog = await Blog.findOne({ slug, published: true })
+      .populate('author', 'username')
+      .lean();
 
-    if (!res.ok) {
-      console.error('Failed to fetch blogs');
-      return null;
-    }
+    if (!blog) return null;
 
-    const data = await res.json();
+    // Increment views without blocking the response
+    Blog.findByIdAndUpdate(blog._id, { $inc: { views: 1 } }).catch(() => {});
 
-    const blog = data.blogs?.find(
-      (b) => b.slug === slug && b.published
-    );
-
-    return blog || null;
+    return blog;
   } catch (error) {
     console.error('Error fetching blog:', error);
     return null;
@@ -44,8 +40,7 @@ export async function generateMetadata({ params }) {
 
   const ogImage = blog.metaImage || blog.image;
 
-  const canonicalUrl =
-    blog.canonicalUrl || `${BASE_URL}/blog/${blog.slug}`;
+  const canonicalUrl = blog.canonicalUrl || `${BASE_URL}/blog/${blog.slug}`;
 
   const metadata = {
     title,
