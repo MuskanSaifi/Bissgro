@@ -58,11 +58,15 @@ export async function PUT(request, { params }) {
     }
 
     if (title !== undefined) page.title = title;
-    if (metaTitle !== undefined) page.metaTitle = metaTitle;
-    if (metaDescription !== undefined) page.metaDescription = metaDescription;
-    if (metaKeywords !== undefined) page.metaKeywords = metaKeywords;
-    if (metaImage !== undefined) page.metaImage = metaImage;
-    if (metaImagePublicId !== undefined) page.metaImagePublicId = metaImagePublicId;
+    if (metaTitle !== undefined) page.metaTitle = metaTitle ? String(metaTitle).trim().slice(0, 120) : '';
+    if (metaDescription !== undefined) {
+      page.metaDescription = metaDescription ? String(metaDescription).trim().slice(0, 500) : '';
+    }
+    if (metaKeywords !== undefined) {
+      page.metaKeywords = metaKeywords ? String(metaKeywords).trim().slice(0, 500) : '';
+    }
+    if (metaImage !== undefined) page.metaImage = metaImage || '';
+    if (metaImagePublicId !== undefined) page.metaImagePublicId = metaImagePublicId || '';
     if (sections !== undefined) {
       page.sections = sections;
       page.imagePublicIds = newIds;
@@ -74,11 +78,24 @@ export async function PUT(request, { params }) {
     } else if (isHome === false) page.isHome = false;
 
     await page.save();
-    if (page.isHome) revalidatePath('/');
+    if (page.isHome) {
+      try {
+        revalidatePath('/');
+      } catch (revalErr) {
+        console.warn('revalidatePath failed:', revalErr?.message);
+      }
+    }
     return NextResponse.json({ message: 'Page updated', page }, { status: 200 });
   } catch (error) {
     console.error('Update page error:', error);
-    return NextResponse.json({ error: 'Server error' }, { status: 500 });
+    let message = error?.message || 'Server error';
+    if (error?.code === 11000) message = 'A page with this URL slug already exists';
+    if (error?.name === 'ValidationError' && error.errors) {
+      const first = Object.values(error.errors)[0];
+      message = first?.message || message;
+    }
+    const status = error?.code === 11000 || error?.name === 'ValidationError' ? 400 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }
 

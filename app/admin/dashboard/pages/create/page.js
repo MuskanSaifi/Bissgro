@@ -43,7 +43,16 @@ export default function CreatePage() {
       toast.error('Title is required');
       return;
     }
-    const s = slug.trim() || title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    const s =
+      slug.trim() ||
+      title
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+    if (!s) {
+      toast.error('Please enter a valid URL slug');
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch('/api/pages', {
@@ -57,21 +66,35 @@ export default function CreatePage() {
           metaKeywords: metaKeywords || undefined,
           metaImage: metaImage || undefined,
           metaImagePublicId: metaImagePublicId || undefined,
-          sections: sections.map((sec, i) => ({ ...sec, order: i })),
+          sections: sections.map((sec, i) => ({
+            type: sec.type,
+            content: sec.content || {},
+            order: i,
+          })),
           published,
           isHome,
         }),
         credentials: 'include',
       });
-      const data = await res.json();
+
+      let data = {};
+      try {
+        data = await res.json();
+      } catch {
+        toast.error(`Failed to create page (server ${res.status}). Check server logs.`, {
+          duration: 7000,
+        });
+        return;
+      }
+
       if (res.ok) {
         toast.success('Page created!');
         router.push('/admin/dashboard/pages');
       } else {
-        toast.error(data.error || 'Failed to create');
+        toast.error(data.error || `Failed to create (${res.status})`, { duration: 7000 });
       }
-    } catch {
-      toast.error('Something went wrong');
+    } catch (err) {
+      toast.error(err?.message || 'Something went wrong', { duration: 7000 });
     } finally {
       setLoading(false);
     }
@@ -121,9 +144,35 @@ export default function CreatePage() {
 
           <div style={{ marginBottom: '24px' }}>
             <h3 style={{ marginBottom: '12px' }}>SEO (optional)</h3>
-            <input type="text" value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)} placeholder="Meta Title" style={{ width: '100%', padding: '10px', marginBottom: '10px', border: '1px solid #ddd', borderRadius: '8px' }} />
-            <textarea value={metaDescription} onChange={(e) => setMetaDescription(e.target.value)} placeholder="Meta Description" rows={2} style={{ width: '100%', padding: '10px', marginBottom: '10px', border: '1px solid #ddd', borderRadius: '8px' }} />
-            <input type="text" value={metaKeywords} onChange={(e) => setMetaKeywords(e.target.value)} placeholder="Meta Keywords" style={{ width: '100%', padding: '10px', marginBottom: '10px', border: '1px solid #ddd', borderRadius: '8px' }} />
+            <input
+              type="text"
+              value={metaTitle}
+              onChange={(e) => setMetaTitle(e.target.value.slice(0, 120))}
+              placeholder="Meta Title"
+              style={{ width: '100%', padding: '10px', marginBottom: '4px', border: '1px solid #ddd', borderRadius: '8px' }}
+            />
+            <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>{metaTitle.length}/120</p>
+
+            <textarea
+              value={metaDescription}
+              onChange={(e) => setMetaDescription(e.target.value.slice(0, 500))}
+              placeholder="Meta Description (recommended ~150-160 characters)"
+              rows={3}
+              style={{ width: '100%', padding: '10px', marginBottom: '4px', border: '1px solid #ddd', borderRadius: '8px' }}
+            />
+            <p style={{ fontSize: '12px', color: metaDescription.length > 160 ? '#d97706' : '#666', marginBottom: '10px' }}>
+              {metaDescription.length}/500 {metaDescription.length > 160 ? '(ideal is under 160 for Google)' : ''}
+            </p>
+
+            <input
+              type="text"
+              value={metaKeywords}
+              onChange={(e) => setMetaKeywords(e.target.value.slice(0, 500))}
+              placeholder="Meta Keywords (comma separated)"
+              style={{ width: '100%', padding: '10px', marginBottom: '4px', border: '1px solid #ddd', borderRadius: '8px' }}
+            />
+            <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px' }}>{metaKeywords.length}/500</p>
+
             <label style={{ display: 'block', marginBottom: '4px', fontWeight: 600 }}>Meta / OG Image</label>
             <ImageUpload value={metaImage} publicId={metaImagePublicId} onChange={({ url, publicId }) => { setMetaImage(url); setMetaImagePublicId(publicId); }} folder="pages" placeholder="Upload meta image for social sharing" />
           </div>
