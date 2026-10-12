@@ -1,4 +1,5 @@
 import HomeHero from './HomeHero';
+import HomeBusinessIds from './HomeBusinessIds';
 import HomeServices from './HomeServices';
 import HomeWhyChoose from './HomeWhyChoose';
 import HomeStatsBar from './HomeStatsBar';
@@ -16,6 +17,7 @@ export default function HomePage() {
   return (
     <div className="home-page">
       <HomeHero />
+      <HomeBusinessIds />
       <HomeServices />
       <HomeWhyChoose />
       <HomeStatsBar />

@@ -49,6 +49,21 @@ const SERVICES = [
     desc: 'Eye-catching visuals, logos, and brand identity design.',
     link: '#',
   },
+  {
+    icon: 'fas fa-id-card',
+    title: 'DUNS Number',
+    desc: 'Official DUNS registration so you can sell on Amazon, Walmart and global platforms.',
+    link: '/duns-number',
+    highlight: true,
+  },
+  {
+    icon: 'fas fa-certificate',
+    title: 'MSME Registration',
+    desc: 'We help you get MSME / Udyam registration for schemes, tenders and business benefits.',
+    link: 'https://wa.me/919625945041?text=Hi%2C%20I%20want%20MSME%20registration',
+    highlight: true,
+    external: true,
+  },
 ];
 
 export default function HomeServices() {
@@ -66,15 +81,22 @@ export default function HomeServices() {
       <div className="home-container">
         <div className="home-services-grid">
           {SERVICES.map((s) => (
-            <div key={s.title} className="home-service-card">
+            <div key={s.title} className={`home-service-card ${s.highlight ? 'home-service-card-highlight' : ''}`}>
+              {s.highlight && <span className="home-service-highlight-tag">We Provide</span>}
               <div className="home-service-icon">
                 <i className={s.icon} />
               </div>
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
-              <Link href={s.link} className="learn-more">
-                Learn More <i className="fas fa-arrow-right" />
-              </Link>
+              {s.external ? (
+                <a href={s.link} className="learn-more" target="_blank" rel="noopener noreferrer">
+                  Learn More <i className="fas fa-arrow-right" />
+                </a>
+              ) : (
+                <Link href={s.link} className="learn-more">
+                  Learn More <i className="fas fa-arrow-right" />
+                </Link>
+              )}
             </div>
           ))}
         </div>

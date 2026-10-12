@@ -92,6 +92,8 @@ export default function Footer() {
             <li><Link href="/best-seo-services-in-noida">SEO</Link></li>
             <li><a href="#">SMO</a></li>
             <li><a href="#">Graphic Designing</a></li>
+            <li><Link href="/duns-number">DUNS Number</Link></li>
+            <li><a href="https://wa.me/919625945041?text=Hi%2C%20I%20want%20MSME%20registration" target="_blank" rel="noopener noreferrer">MSME Registration</a></li>
           </ul>
         </div>
 

@@ -86,6 +86,8 @@ export default function Header() {
               <Link href="/web-development-company-in-noida" onClick={closeMenu}>Website Development</Link>
               <Link href="/best-seo-services-in-noida" onClick={closeMenu}>SEO Service</Link>
               <Link href="/plans" onClick={closeMenu}>Our Packages</Link>
+              <Link href="/duns-number" onClick={closeMenu}>DUNS Number</Link>
+              <a href="https://wa.me/919625945041?text=Hi%2C%20I%20want%20MSME%20registration" onClick={closeMenu} target="_blank" rel="noopener noreferrer">MSME Registration</a>
               <a href="#" onClick={closeMenu}>Graphics Service</a>
             </div>
           </div>

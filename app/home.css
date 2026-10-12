@@ -416,6 +416,148 @@ header.site-header.home-header .logo-text {
   flex: 1;
 }
 
+.home-service-card-highlight {
+  border: 2px solid #f97316;
+  background: linear-gradient(180deg, #fff7ed 0%, #fff 48%);
+  position: relative;
+}
+
+.home-service-highlight-tag {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #f97316;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+/* ---------- DUNS + MSME highlight ---------- */
+.home-biz-ids {
+  padding: 28px 0 8px;
+  background: #fff;
+}
+
+.home-biz-ids-inner {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  border-radius: 24px;
+  padding: 36px 32px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 28px;
+  align-items: center;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
+}
+
+.home-biz-badge {
+  display: inline-block;
+  background: #f97316;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.home-biz-ids-copy h2 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.home-biz-ids-copy h2 span {
+  color: #fb923c;
+}
+
+.home-biz-ids-copy p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.home-biz-ids-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.home-biz-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 18px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  min-height: 210px;
+  border: 2px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.home-biz-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  color: inherit;
+}
+
+.home-biz-card-tag {
+  align-self: flex-start;
+  background: #fff7ed;
+  color: #ea580c;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 8px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.home-biz-card i {
+  color: #2563eb;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.home-biz-card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.home-biz-card p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.home-biz-card-link {
+  margin-top: 14px;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .home-biz-ids-inner,
+  .home-biz-ids-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- Why Choose Us ---------- */
 .home-why-grid {
   display: grid;
