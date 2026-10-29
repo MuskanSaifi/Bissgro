@@ -2,6 +2,7 @@
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css');
 @import '../style.css';
 @import './home.css';
+@import './duns.css';
 
 .blog-card-link {
   transition: transform 0.2s, box-shadow 0.2s;
